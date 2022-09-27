@@ -2,6 +2,7 @@
 A game where the player fights with regular languages
 
 ```
+pip3 install Django
 git clone https://github.com/VeriFIT/regular-game.git
 cd regular-game/regular_game_site
 python3 manage.py migrate
