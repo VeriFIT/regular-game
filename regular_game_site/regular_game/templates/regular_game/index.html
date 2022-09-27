@@ -1,3 +1,13 @@
+{% if player %}
+<h1>Konec hry!</h1>
+<table>
+    <tr>
+        <td>{{ player.name }}</td>
+        <td>{{ player.score }}</td>
+    </tr>
+</table>
+{% endif %}
+
 <form action="{% url 'regular_game:start_game' %}" method="post">
   {% csrf_token %}
   {% if error_message %}<p><font color="red">{{ error_message }}</font></p>{% endif %}
@@ -9,9 +19,17 @@
 <h1>High Score</h1>
 {% if highscore_list %}
 <table>
+    <tr>
+      <th>Hráč</th>
+      <th>Začátek hry</th>
+      <th>Délka hry</th>
+      <th>Score</th>
+    </tr>
     {% for player in highscore_list %}
     <tr>
         <td>{{ player.name }}</td>
+        <td>{{ player.time_begin }}</td>
+        <td>{{ player.duration }}</td>
         <td>{{ player.score }}</td>
     </tr>
     {% endfor %}
@@ -20,3 +38,9 @@
     <p>Žádný hráč zatím hru nedokončil.</p>
 {% endif %}
 
+{% if player %}
+<form action="{% url 'regular_game:index' %}" method="get">
+  {% csrf_token %}
+  <input type="submit" value="Na úvodní stránku">
+</form>
+{% endif %}

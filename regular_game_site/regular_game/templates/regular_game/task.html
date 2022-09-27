@@ -3,7 +3,27 @@
 {{ task.text }}
 </p>
 
+<h2>Ano</h2>
+<pre>
+{% for snippet in pos_snips %}
+{{ snippet.text }}
+{% endfor %}
+</pre>
+
+<h2>Ne</h2>
+
+<pre>
+{% for snippet in neg_snips %}
+{{ snippet.text }}
+{% endfor %}
+</pre>
+
 <form action="{% url 'regular_game:answer' player.id %}" method="post">
   {% csrf_token %}
+
+<label for="regex">Regex:</label>
+<input type="text" id="regex" name="regex">
+{% if error_message %}<p><font color="red">{{ error_message }}</font></p>{% endif %}
+<br>
 <input type="submit" value="Odpovědět">
 </form>

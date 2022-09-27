@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.views import generic
 
 from datetime import datetime
+import re
 
 from .models import *
 
@@ -14,15 +15,23 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return at most 10 players with the highest scores."""
-        return Player.objects.order_by('-score')[:10]
+        return Player.objects.filter(finished=True).order_by('-score')[:10]
 
 
 # A page with one step of the game
 def task(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
-    task_id = player.next_task
-    task = get_object_or_404(Task, pk=task_id)
-    return render(request, 'regular_game/task.html', {'player': player, 'task': task})
+    task = get_object_or_404(Task, num=player.next_task)
+    snippets = task.snippet_set.all()
+    pos_snips = [snip for snip in snippets if snip.snip_type == 'Y']
+    neg_snips = [snip for snip in snippets if snip.snip_type == 'N']
+    return render(request, 'regular_game/task.html',
+                  {
+                      'player': player,
+                      'task': task,
+                      'pos_snips': pos_snips,
+                      'neg_snips': neg_snips
+                  })
 
 
 # a method for starting the game
@@ -48,8 +57,62 @@ def start_game(request):
 # a method for answering a task
 def answer(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
+    task = get_object_or_404(Task, num=player.next_task)
+    snippets = task.snippet_set.all()
+    pos_snips = [snip for snip in snippets if snip.snip_type == 'Y']
+    neg_snips = [snip for snip in snippets if snip.snip_type == 'N']
+
+    if 'regex' not in request.POST or not request.POST['regex']:
+        return render(request, 'regular_game/task.html',
+                        {
+                            'player': player,
+                            'task': task,
+                            'pos_snips': pos_snips,
+                            'neg_snips': neg_snips,
+                            'error_message': "Zadejte regex!"
+                        })
+
+    regex = request.POST['regex']
+    correct = True
+    for snip in pos_snips:   # we need to match all examples
+        if not re.search(regex, snip.text):
+            correct = False
+            break
+
+    if correct:
+        for snip in neg_snips:   # we need to reject all counterexamples
+            if re.search(regex, snip.text):
+                correct = False
+                break
+
+    if not correct:
+        return render(request, 'regular_game/task.html',
+                        {
+                            'player': player,
+                            'task': task,
+                            'pos_snips': pos_snips,
+                            'neg_snips': neg_snips,
+                            'error_message': "Špatný regex!"
+                        })
+
 
     player.next_task += 1
+    player.score += 1
     player.save()
 
-    return HttpResponseRedirect(reverse('regular_game:task', args=(player.pk,)))
+    if player.next_task == 3:   # end game
+        player.finished = True
+        player.time_end = datetime.now()
+        player.save()
+        return HttpResponseRedirect(reverse('regular_game:endgame', args=(player.pk,)))
+    else:
+        return HttpResponseRedirect(reverse('regular_game:task', args=(player.pk,)))
+
+# end of game
+def endgame(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    return render(request, 'regular_game/index.html',
+                    {
+                        'player': player,
+                        'highscore_list': IndexView().get_queryset()
+                    })
