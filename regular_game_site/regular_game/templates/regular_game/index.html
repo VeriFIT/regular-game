@@ -1,10 +1,22 @@
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+<form action="{% url 'regular_game:start_game' %}" method="post">
+  {% csrf_token %}
+  {% if error_message %}<p><font color="red">{{ error_message }}</font></p>{% endif %}
+  <label for="plname">Jméno:</label>
+  <input type="text" id="plname" name="plname"><br>
+  <input type="submit" value="Nová hra">
+</form>
+
+<h1>High Score</h1>
+{% if highscore_list %}
+<table>
+    {% for player in highscore_list %}
+    <tr>
+        <td>{{ player.name }}</td>
+        <td>{{ player.score }}</td>
+    </tr>
     {% endfor %}
-    </ul>
+</table>
 {% else %}
-    <p>No polls are available.</p>
+    <p>Žádný hráč zatím hru nedokončil.</p>
 {% endif %}
 

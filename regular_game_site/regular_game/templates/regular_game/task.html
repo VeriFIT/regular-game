@@ -1,0 +1,9 @@
+<h1>{{ task.num }}: {{ task.title }}</h1>
+<p>
+{{ task.text }}
+</p>
+
+<form action="{% url 'regular_game:answer' player.id %}" method="post">
+  {% csrf_token %}
+<input type="submit" value="Odpovědět">
+</form>
