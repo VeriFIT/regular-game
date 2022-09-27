@@ -100,7 +100,7 @@ def answer(request, player_id):
     player.score += 1
     player.save()
 
-    if player.next_task == 3:   # end game
+    if player.next_task == 7:   # end game
         player.finished = True
         player.time_end = datetime.now()
         player.save()
