@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+  <title>The Regular Game</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      font: 20px Montserrat, sans-serif;
+    }
+    p {font-size: 16px;}
+    pre {font-size: 16px;}
+    .margin {margin-bottom: 30px;}
+    .bg-1 { 
+      background-color: #00a9e0;
+    }
+    .bg-grey {
+      background-color: #f6f6f6;
+    }
+    .bg-4 { 
+      background-color: #2f2f2f;
+      color: #fff;
+    }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+
+<!-- Header -->
+<div class="p-4 bg-1 text-center text-white">
+  <h1 class="margin">The Regular Game</h3>
+  <h5>Bojujte proti regulárním jazykům!</h5>
+</div>
+
+{% block content %}
+{% endblock %}
+
+<!-- Footer -->
+<footer class="footer mt-auto bg-4 text-center py-4">
+  <div class="container">
+    <p>Made by <a href="https://www.fit.vut.cz/research/group/verifit/.cs">VeriFIT</a> &copy; 2022</p>
+  </div>
+</footer>
+
+</body>
+</html>

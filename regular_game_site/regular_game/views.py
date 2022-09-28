@@ -8,6 +8,8 @@ import re
 
 from .models import *
 
+TASKS_CNT = 6
+
 # Main page with high score chart
 class IndexView(generic.ListView):
     template_name = 'regular_game/index.html'
@@ -30,7 +32,10 @@ def task(request, player_id):
                       'player': player,
                       'task': task,
                       'pos_snips': pos_snips,
-                      'neg_snips': neg_snips
+                      'neg_snips': neg_snips,
+                      'tasks_cnt': TASKS_CNT,
+                      'tasks_done': task.num - 1,
+                      'progress': 100 / TASKS_CNT * (task.num - 1)
                   })
 
 

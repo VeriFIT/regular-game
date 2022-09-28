@@ -1,29 +1,127 @@
-<h1>{{ task.num }}: {{ task.title }}</h1>
-<p>
-{{ task.text }}
-</p>
+{% extends "./template.html" %}
 
-<h2>Ano</h2>
+{% block content %}
+
+
+<!-- Task description -->
+<div class="container-fluid px-4 py-2">
+  <h2>{{ task.num }}: {{ task.title }}</h2>
+  <div class="alert alert-info">
+    {{ task.text }}
+  </div>
+</div>
+
+<!-- Progress bar -->
+<div class="container-fluid px-4 py-0">
+  <div class="progress" style="height: 20px">
+    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-label="Task progress" 
+    style="width: {{ progress }}%" aria-valuenow="{{ task.num }}" aria-valuemin="0" aria-valuemax="6">
+      <strong style="font-size: 15px">{{ tasks_done }} / {{ tasks_cnt }}</strong>
+    </div>
+  </div>
+</div>
+
+
+<!-- Long Strings -->
+{% if task.num == 6 %}
+<div class="container-fluid p-4 bg-grey">
+  <!-- Valid strings -->
+  <div class="row align-items-md-stretch">
+    <div class="col-md-12">
+      <h3>Platné řetězce</h3>
+    </div>
+  </div>
+  <div class="row align-items-md-stretch">
+    <div class="col-md-12">
+      <div class="h-100 p-2 text-bg-success border rounded-3">
 <pre>
 {% for snippet in pos_snips %}
 {{ snippet.text }}
 {% endfor %}
 </pre>
-
-<h2>Ne</h2>
-
+      </div>
+    </div>
+  </div>
+  <!-- Invalid strings -->
+  <div class="row align-items-md-stretch">
+    <div class="col-md-12">
+      <h3>Neplatné řetězce</h3>
+    </div>
+  </div>
+  <div class="row align-items-md-stretch">
+    <div class="col-md-12">
+      <div class="h-100 p-2 text-bg-danger border rounded-3">
+        
 <pre>
 {% for snippet in neg_snips %}
 {{ snippet.text }}
 {% endfor %}
 </pre>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 
-<form action="{% url 'regular_game:answer' player.id %}" method="post">
+<!-- Short Strings -->
+{% if task.num != 6 %}
+<div class="container-fluid p-4 bg-grey">
+  <div class="row align-items-md-stretch">
+    <div class="col-md-6">
+      <h3>Platné řetězce</h3>
+    </div>
+    <div class="col-md-6">
+      <h3>Neplatné řetězce</h3>
+    </div>
+  </div>
+  <div class="row align-items-md-stretch">
+    <div class="col-md-6">
+      <div class="h-100 p-2 text-bg-success border rounded-3">
+<pre>
+{% for snippet in pos_snips %}
+{{ snippet.text }}
+{% endfor %}
+</pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="h-100 p-2 text-bg-danger border rounded-3">
+        
+<pre>
+{% for snippet in neg_snips %}
+{{ snippet.text }}
+{% endfor %}
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Submit Form -->
+<form autocomplete="off" action="{% url 'regular_game:answer' player.id %}" method="post">
   {% csrf_token %}
-
-<label for="regex">Regex:</label>
-<input type="text" id="regex" name="regex">
-{% if error_message %}<p><font color="red">{{ error_message }}</font></p>{% endif %}
-<br>
-<input type="submit" value="Odpovědět">
+  <div class="row mb-3 bg-grey py-2">
+    <div class="col-sm-3"></div>
+    <label class="col-sm-1 col-form-label" for="regex"><strong>Regex:</strong></label>
+    <div class="col-sm-4 mb-3">
+      <input type="text" class="form-control" id="regex" name="regex" placeholder="Zadejte regex">
+    </div>
+    <div class="col-sm-4">
+      <button type="submit" class="mx-1 btn btn-primary">Odpovědět</button>
+      <button type="submit" class="mx-1 btn btn-warning">Přeskočit</button>
+      <button type="submit" class="mx-1 btn btn-danger">Ukončit</button>
+    </div>
+  </div>
+  {% if error_message %}
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="alert alert-danger col-sm-6">
+      <strong>Chyba!</strong> {{ error_message }}
+    </div>
+  </div>
+  {% endif %}
 </form>
+
+
+{% endblock %}
