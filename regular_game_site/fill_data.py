@@ -20,7 +20,7 @@ task.save()
 # examples
 task.snippet_set.create(
     snip_type='Y',
-    text="For your knowledge, 25%% of this fund $25,000,000 USD will be given to you."
+    text="For your knowledge, 25% of this fund $25,000,000 USD will be given to you."
 )
 task.snippet_set.create(
     snip_type='Y',
@@ -88,7 +88,7 @@ task.snippet_set.create(
 ############################### TASK 3 ##########################################
 task = Task(
     num=3,
-    title="E-maily 2",
+    title="E-maily, pokračování",
     text="Nová várka emailů bude potřebovat pokročilejší detekci podezřelých finančních obnosů.",
 )
 task.save()
@@ -96,7 +96,7 @@ task.save()
 # examples
 task.snippet_set.create(
     snip_type='Y',
-    text="For your knowledge, 25%% of this fund $25,000,000.00 will be given to you."
+    text="For your knowledge, 25% of this fund $25,000,000.00 will be given to you."
 )
 task.snippet_set.create(
     snip_type='Y',
