@@ -86,7 +86,7 @@ def answer(request, player_id):
         player.score += SKIP_PENALTY
         player.next_task += 1
         player.save()
-        return render_next_task_with(request, player)
+        return HttpResponseRedirect(reverse('regular_game:task', args=(player.pk,)))
     elif 'giveup' in request.POST:
         player.score += (TASKS_CNT - player.next_task + 1) * SKIP_PENALTY
         player.next_task = TASKS_CNT + 1
