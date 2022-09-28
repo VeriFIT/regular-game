@@ -24,6 +24,21 @@
       <div class="col-sm-2">
         <input type="text" class="form-control" id="plname" name="plname" placeholder="Zadejte jméno">
       </div>
+      <div>
+        Za koho chceš hrát?
+        <img src="https://c.tenor.com/_jbZnDIerhwAAAAM/4th-of-july-independence-day.gif" alt="Čak" caption width="300"/>
+        <label for="chuck">Čak Noris</label>
+        <input type="radio" id="chuck" name="chuck"><br>
+        <img src="https://c.tenor.com/JOX66MJe7DwAAAAM/mac-gyver-smiling.gif" alt="Mekgajvr" caption width="300"/>
+        <label for="macgyver">Mekgajvr</label>
+        <input type="radio" id="macgyver" name="macgyver"><br>
+        <img src="https://c.tenor.com/tZVpbfTIjNMAAAAM/pikachu.gif" alt="Pikaču" caption width="300"/>
+        <label for="pikachu">Pikaču</label>
+        <input type="radio" id="pikachu" name="pikachu"><br>
+        <img src="https://compote.slate.com/images/05a4298a-2eb6-4346-a8f8-2c80f34aaa98.jpg" alt="Agent Bureš" caption width="300"/>
+        <label for="bures">Agent Bureš</label>
+        <input type="radio" id="bures" name="bures"><br>
+      </div>
       <div class="col-sm-1">
         <button type="submit" class="btn btn-primary">Nová hra</button>
       </div>
@@ -48,6 +63,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th></th>
         <th>Hráč</th>
         <th>Začátek hry</th>
         <th>Délka hry</th>
@@ -57,6 +73,7 @@
     <tbody>
       {% for player in highscore_list %}
       <tr>
+          <td>{{ forloop.counter }}</td>
           <td>{{ player.name }}</td>
           <td>{{ player.time_begin }}</td>
           <td>{{ player.duration }}</td>
