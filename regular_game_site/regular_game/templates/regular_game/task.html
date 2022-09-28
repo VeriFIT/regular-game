@@ -11,6 +11,8 @@
   </div>
 </div>
 
+<h3>Score: {{ player.score }} </h3>
+
 <!-- Progress bar -->
 <div class="container-fluid px-4 py-0">
   <div class="progress" style="height: 20px">
@@ -105,12 +107,16 @@
     <div class="col-sm-3"></div>
     <label class="col-sm-1 col-form-label" for="regex"><strong>Regex:</strong></label>
     <div class="col-sm-4 mb-3">
-      <input type="text" class="form-control" id="regex" name="regex" placeholder="Zadejte regex">
+      {% if regex %}
+        <input type="text" class="form-control" id="regex" name="regex" value="{{ regex }}">
+      {% else %}
+        <input type="text" class="form-control" id="regex" name="regex" placeholder="Zadejte regex">
+      {% endif %}
     </div>
     <div class="col-sm-4">
-      <button type="submit" class="mx-1 btn btn-primary">Odpovědět</button>
-      <button type="submit" class="mx-1 btn btn-warning">Přeskočit</button>
-      <button type="submit" class="mx-1 btn btn-danger">Ukončit</button>
+      <button type="submit" name="submit" class="mx-1 btn btn-primary">Odpovědět</button>
+      <button type="submit" name="skip" class="mx-1 btn btn-warning">Přeskočit</button>
+      <button type="submit" name="giveup" class="mx-1 btn btn-danger">Ukončit</button>
     </div>
   </div>
   {% if error_message %}
@@ -120,6 +126,22 @@
       <strong>Chyba!</strong> {{ error_message }}
     </div>
   </div>
+  {% endif %}
+  {% if bad_pos %}
+  nematchuje tyto pozitivni
+  <pre>
+  {% for snippet in bad_pos %}
+  {{ snippet.text }}
+  {% endfor %}
+  </pre>
+  {% endif %}
+  {% if bad_neg %}
+  matchuje tyto negativni
+  <pre>
+  {% for snippet in bad_neg %}
+  {{ snippet.text }}
+  {% endfor %}
+  </pre>
   {% endif %}
 </form>
 
