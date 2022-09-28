@@ -19,22 +19,30 @@
   <form autocomplete="off" action="{% url 'regular_game:start_game' %}" method="post">
     {% csrf_token %}
     <div class="row mb-3">
+      Zlý čaroděj Gargamel chce ovládnout svět a jen Ty mu v tom můžeš zabránit!
       <div class="col-sm-4"></div>
       <label class="col-sm-1 col-form-label text-end" for="plname">Jméno:</label>
       <div class="col-sm-2">
-        <input type="text" class="form-control" id="plname" name="plname" placeholder="Zadejte jméno">
+        <input type="text" class="form-control" id="plname" name="plname" placeholder="Zadej své jméno">
       </div>
       <div>
+      <img src="http://static1.wikia.nocookie.net/__cb20130715165412/smurfsfanon/images/3/3b/Gargamel_(SA).gif" alt="Gargamel" width="300"/>
         Za koho chceš hrát?
         <img src="https://c.tenor.com/_jbZnDIerhwAAAAM/4th-of-july-independence-day.gif" alt="Čak" caption width="300"/>
         <label for="chuck">Čak Noris</label>
-        <input type="radio" id="chuck" name="chuck"><br>
-        <img src="https://c.tenor.com/JOX66MJe7DwAAAAM/mac-gyver-smiling.gif" alt="Mekgajvr" caption width="300"/>
+        <input type="radio" id="chuck" name="chuck" checked=true><br>
+        <img src="https://c.tenor.com/JOX66MJe7DwAAAAM/mac-gyver-smiling.gif" alt="Mekgajvr" width="300"/>
         <label for="macgyver">Mekgajvr</label>
         <input type="radio" id="macgyver" name="macgyver"><br>
         <img src="https://c.tenor.com/tZVpbfTIjNMAAAAM/pikachu.gif" alt="Pikaču" caption width="300"/>
         <label for="pikachu">Pikaču</label>
         <input type="radio" id="pikachu" name="pikachu"><br>
+        <img src="https://i.pinimg.com/originals/13/6c/30/136c305a1fd5b8ea73bdac25b67bfd02.jpg" alt="Agent Smith" caption width="300"/>
+        <label for="smith">Agent Smith</label>
+        <input type="radio" id="smith" name="smith"><br>
+        <img src="https://cpasvrai.com/wp-content/uploads/2016/10/agent-007.jpg" alt="Agent 007" caption width="300"/>
+        <label for="007">Agent 007</label>
+        <input type="radio" id="007" name="007"><br>
         <img src="https://compote.slate.com/images/05a4298a-2eb6-4346-a8f8-2c80f34aaa98.jpg" alt="Agent Bureš" caption width="300"/>
         <label for="bures">Agent Bureš</label>
         <input type="radio" id="bures" name="bures"><br>

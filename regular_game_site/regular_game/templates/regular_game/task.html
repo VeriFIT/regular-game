@@ -13,6 +13,10 @@
 
 <h3>Score: {{ player.score }} </h3>
 
+{% if best_sol_len %}
+<h3>Délka nejlepšího řešení: {{ best_sol_len }} (hráč "{{ best_sol_player.name }}")</h3>
+{% endif %}
+
 <!-- Progress bar -->
 <div class="container-fluid px-4 py-0">
   <div class="progress" style="height: 20px">

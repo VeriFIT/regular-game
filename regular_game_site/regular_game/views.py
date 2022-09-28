@@ -61,7 +61,9 @@ def render_next_task_with(request, player, regex=None, error_msg=None, bad_pos=N
                       'progress': 100 / TASKS_CNT * (task.num - 1),
                       'error_message': error_msg,
                       'bad_pos': bad_pos,
-                      'bad_neg': bad_neg
+                      'bad_neg': bad_neg,
+                      'best_sol_len': len(task.best_solution) if task.best_solution else None,
+                      'best_sol_player': task.best_solution_player
                   })
 
 
@@ -122,6 +124,12 @@ def answer(request, player_id):
 
     player.next_task += 1
     player.score += len(regex)
+
+    if not task.best_solution or len(regex) < len(task.best_solution):
+        task.best_solution = regex
+        task.best_solution_player = player
+        task.save()
+
     player.save()
 
     return HttpResponseRedirect(reverse('regular_game:task', args=(player.pk,)))

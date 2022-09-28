@@ -23,6 +23,8 @@ class Task(models.Model):
     title = models.CharField(max_length=200)
     num = models.IntegerField()
     text = models.TextField()
+    best_solution = models.TextField(null=True)
+    best_solution_player = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"{self.num}: {self.title}"
