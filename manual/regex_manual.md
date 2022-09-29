@@ -19,7 +19,7 @@
 * `(ab){2,4}` - 2&ndash;4 opakování řetězce `ab`, např. `123ababab67`
 * `^ahoj` - zachytí text, ve kterém je řetězec `ahoj` na začátku řádku
 * `konec$` - zachytí text, ve kterém je řetězec `konec` na konci řádku
-* `(jedna)|(dva)` - zachytí text, ve kterém se vyskytuje řetězec `jedna` nebo řetězec `dva` (pozor na nutnost použití závorek pro řetězce delší než jeden znak!)
+* `jedna|dva` - zachytí text, ve kterém se vyskytuje řetězec `jedna` nebo řetězec `dva`
 * `\x` - ruší speciální význam symbolu `x`:
   * příklad zachycení pro regex `\(pozn\.`: `v létě bývá teplo (pozn. v zimě zase zima)` (ruší se speciální význam symbolu `(`)
   * příklad propuštění pro regex `\(pozn\.`: `na jaře se probouzí plazi (poznamenala ještěrka)` (ruší se speciální význam symbolů `(` a `.`)

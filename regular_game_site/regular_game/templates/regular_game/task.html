@@ -7,7 +7,7 @@
 <div class="container-fluid px-4 py-2">
   <h2>{{ task.num }}: {{ task.title }}</h2>
   <div class="alert alert-info">
-    {{ task.text }}
+    {{ task.text|safe }}
   </div>
 </div>
 
@@ -35,13 +35,13 @@
 
 
 <!-- Long Strings -->
-{% if task.num == 6 %}
+{% if task.num == 11 %}
 <div class="container-fluid p-4 bg-grey">
   <!-- Valid strings -->
   <div class="row align-items-md-stretch">
     <div class="col-md-12">
       <div class="card text-white bg-success mb-3 h-100">
-        <div class="card-header">Platné řetězce</div>
+        <div class="card-header">Potřeba zachytit</div>
         <div class="card-body">
 <pre class="card-text">
 {% for snippet in pos_snips %}
@@ -56,7 +56,7 @@
   <div class="row align-items-md-stretch mt-3">
     <div class="col-md-12">
       <div class="card text-white bg-danger mb-3 h-100">
-        <div class="card-header">Neplatné řetězce</div>
+        <div class="card-header">Musí projít</div>
         <div class="card-body">
 <pre>
 {% for snippet in neg_snips %}
@@ -71,12 +71,12 @@
 {% endif %}
 
 <!-- Short Strings -->
-{% if task.num != 6 %}
+{% if task.num != 11 %}
 <div class="container-fluid p-4 bg-grey">
   <div class="row align-items-md-stretch">
     <div class="col-md-6">
       <div class="card text-white bg-success mb-3 h-100">
-        <div class="card-header">Platné řetězce</div>
+        <div class="card-header">Potřeba zachytit</div>
         <div class="card-body">
 <pre class="card-text">
 {% for snippet in pos_snips %}
@@ -88,7 +88,7 @@
     </div>
     <div class="col-md-6">
       <div class="card text-white bg-danger mb-3 h-100">
-        <div class="card-header">Neplatné řetězce</div>
+        <div class="card-header">Musí projít</div>
         <div class="card-body">
 <pre>
 {% for snippet in neg_snips %}
@@ -133,13 +133,13 @@
 
 
 <!-- Invalid short matches reporting -->
-{% if task.num != 6 %}
+{% if task.num != 11 %}
   <div class="container-fluid p-4">
     <div class="row align-items-md-stretch">
       {% if bad_pos %}
       <div class="col-md-6">
         <div class="card border-danger mb-3">
-          <div class="card-header">Nezachycené platné řetězce</div>
+          <div class="card-header">Nepodařilo se Ti zachytit tyto řetězce:</div>
           <div class="card-body text-danger">
 <pre class="card-text">
 {% for snippet in bad_pos %}
@@ -153,7 +153,7 @@
       {% if bad_neg %}
       <div class="col-md-6">
         <div class="card border-danger mb-3">
-          <div class="card-header">Zachycené neplatné řetězce</div>
+          <div class="card-header">Zachytil jsi omylem tyto řetězce:</div>
           <div class="card-body text-danger">
 <pre class="card-text">
 {% for snippet in bad_neg %}
@@ -169,14 +169,14 @@
 {% endif %}
 
 <!-- Invalid long matches reporting -->
-{% if task.num == 6 %}
+{% if task.num == 11 %}
 <div class="container-fluid p-4">
   <!-- Valid strings -->
   {% if bad_pos %}
   <div class="row align-items-md-stretch">
     <div class="col-md-12">
       <div class="card border-danger mb-3">
-        <div class="card-header">Nezachycené platné řetězce</div>
+        <div class="card-header">Nepodařilo se Ti zachytit tyto řetězce:</div>
         <div class="card-body text-danger">
 <pre class="card-text">
 {% for snippet in bad_pos %}
@@ -193,7 +193,7 @@
   <div class="row align-items-md-stretch mt-3">
     <div class="col-md-12">
       <div class="card border-danger mb-3">
-        <div class="card-header">Zachycené neplatné řetězce</div>
+        <div class="card-header">Zachytil jsi omylem tyto řetězce:</div>
         <div class="card-body text-danger">
 <pre class="card-text">
 {% for snippet in bad_neg %}

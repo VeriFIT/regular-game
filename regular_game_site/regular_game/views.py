@@ -9,7 +9,7 @@ import re
 from .models import *
 
 # number of tasks
-TASKS_CNT = 6
+TASKS_CNT = Task.objects.all().order_by('-num')[0].num
 
 # penalty for skipping a task
 SKIP_PENALTY = 30
