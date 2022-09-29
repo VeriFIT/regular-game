@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="generator" content="pandoc">
+      
+      
+      
+      <!-- Bootstrap -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <!-- Font-awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!-- Styles -->
+      <link rel="stylesheet" href="https://ashki23.github.io/styles.css">
+            <!-- Add favicon here -->
+            <!-- Add site-verifications here -->
+         </head>
+   <body>
+            <div class="container">
+         
+                  <div class="row">
+            <div class="col-xl-10"><h1 id="úvod-do-regexů">Úvod do
+regexů</h1>
+<ul>
+<li><code>a</code> - zachytí text, ve kterém se kdekoliv vyskytuje
+symbol <code>a</code>, propustí ostatní texty (podobně pro ostatní
+symboly)
+<ul>
+<li>příklady zachycení: <code>Gargamel</code>, <code>Jirka</code>,
+<code>Šmoulinka</code>, <code>Kobyla má malý bok</code></li>
+<li>příklady propuštění: <code>hobit</code>, <code>Andrej</code>
+(<code>A</code> a <code>a</code> jsou různé symboly!),
+<code>jáhly</code> (<code>á</code> a <code>a</code> jsou různé
+symboly)</li>
+</ul></li>
+<li><code>abc</code> - zachytí text, ve kterém se kdekoliv vyskytuje
+řetězec <code>abc</code>
+<ul>
+<li>příklady zachycení: <code>mám rád časopis abc</code>,
+<code>abcdefghijklmnopqrstuvwzyx</code></li>
+<li>příklady propuštění: <code>babička</code></li>
+</ul></li>
+<li><code>.</code> - zachytí libovolný znak
+<ul>
+<li>příklady zachycení pro regex <code>n.z.ar</code>:
+<code>nazdar</code>, <code>nezmar</code></li>
+</ul></li>
+<li><code>[abc]</code> - zachytí libovolný ze znaků <code>a</code>,
+<code>b</code>, <code>c</code> (lze použít i rozsah, např.
+<code>[a-z]</code> pro <em>všechna malá</em> písmena anglické abecedy
+nebo <code>[a-zA-Z]</code> pro <em>všechna</em> písmena anglické
+abecedy)</li>
+<li><code>(ab)*</code> - zachytí text obsahující nula či více výskytů
+řetězce <code>ab</code> za sebou (pro jeden znak nejsou potřeba závorky)
+<ul>
+<li>příklady zachycení pro regex <code>0(xy)*1</code>:
+<code>10xy10</code>, <code>ABC0xyxyxy1DEF</code>, <code>1010</code>
+(nula výskytů), <code>1001</code> (nula výskytů)</li>
+<li>příklady propuštění pro regex <code>0(xy)*1</code>:
+<code>11110000</code>, <code>0yx1</code></li>
+</ul></li>
+<li><code>(ab)+</code> - jako <code>(ab)*</code>, ale pro <em>alespoň
+jeden</em> výskyt</li>
+<li><code>(ab)?</code> - nula nebo jeden výskyt řetězce
+<code>ab</code></li>
+<li><code>(ab){4}</code> - 4 opakování řetězce <code>ab</code>, např.
+<code>123abababab67</code></li>
+<li><code>(ab){2,4}</code> - 2–4 opakování řetězce <code>ab</code>,
+např. <code>123ababab67</code></li>
+<li><code>^ahoj</code> - zachytí text, ve kterém je řetězec
+<code>ahoj</code> na začátku řádku</li>
+<li><code>konec$</code> - zachytí text, ve kterém je řetězec
+<code>konec</code> na konci řádku</li>
+<li><code>(jedna)|(dva)</code> - zachytí text, ve kterém se vyskytuje
+řetězec <code>jedna</code> nebo řetězec <code>dva</code> (pozor na
+nutnost použití závorek pro řetězce delší než jeden znak!)</li>
+<li><code>\x</code> - ruší speciální význam symbolu <code>x</code>:
+<ul>
+<li>příklad zachycení pro regex<code>\(pozn\.</code>:
+<code>v létě bývá teplo (pozn. v zimě zase zima)</code> (ruší se
+speciální význam symbolu <code>(</code>)</li>
+<li>příklad propuštění pro regex <code>\(pozn\.</code>:
+<code>na jaře se probouzí plazi (poznamenala ještěrka)</code> (ruší se
+speciální význam symbolů <code>(</code> a <code>.</code>)</li>
+</ul></li>
+</ul></div>
+            <div class="d-none d-xl-block col-xl-2 bd-toc">
+               <ul class="section-nav">
+                  <li class="toc-entry"><ul>
+<li><a href="#úvod-do-regexů" id="toc-úvod-do-regexů">Úvod do
+regexů</a></li>
+</ul></li>
+               </ul>
+            </div>
+         </div>
+               </div>
+            <!-- Add comment hosting service here -->
+            <!-- Footer -->
+            <footer class="footer text-muted">
+               <div align="center">
+                  <!-- Please keep the following line -->
+                  Built with <a href="https://www.pandoc.org" target="_blank" rel="noopener">Pandoc</a> 
+                  using <a href="https://github.com/ashki23/pandoc-bootstrap" target="_blank" rel="noopener">pandoc-bootstrap</a> theme
+                  <br />
+               </div>
+            </footer>
+            <!-- Add global site tag (gtag.js) and site analytics here -->
+            <!-- JS, Popper.js, and jQuery -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+      <!-- Mathjax -->
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script>
+         /* Bootstrap styles to tables */
+         function bootstrapStylePandocTables() {
+         $('tr.header').parent('thead').parent('table').addClass('table table-condensed'); }
+         $(document).ready(function () { bootstrapStylePandocTables(); });
+         /* Adjust the height when click the toc */
+         var shiftWindow = function() { scrollBy(0, -60) };
+         window.addEventListener("hashchange", shiftWindow);
+         function load() { if (window.location.hash) shiftWindow(); }
+      </script>
+   </body>
+</html>
