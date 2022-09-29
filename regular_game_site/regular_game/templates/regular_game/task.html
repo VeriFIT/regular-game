@@ -11,14 +11,20 @@
   </div>
 </div>
 
-<h3>Score: {{ player.score }} </h3>
 
-{% if best_sol_len %}
-<h3>Délka nejlepšího řešení: {{ best_sol_len }} (hráč "{{ best_sol_player.name }}")</h3>
-{% endif %}
-
-<!-- Progress bar -->
-<div class="container-fluid px-4 py-0">
+<div class="container-fluid px-4 py-0 bg-grey">
+  <!-- Score + Best solution -->
+  <div class="row">
+    <div class="col">
+      <h3>Score: {{ player.score }} </h3>
+    </div>
+    <div class="col text-end">
+      {% if best_sol_len %}
+      <h3>Délka nejlepšího řešení: {{ best_sol_len }} (hráč "{{ best_sol_player.name }}")</h3>
+      {% endif %}
+    </div>
+  </div>
+  <!-- Progress bar -->
   <div class="progress" style="height: 20px">
     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-label="Task progress" 
     style="width: {{ progress }}%" aria-valuenow="{{ task.num }}" aria-valuemin="0" aria-valuemax="6">
@@ -34,35 +40,30 @@
   <!-- Valid strings -->
   <div class="row align-items-md-stretch">
     <div class="col-md-12">
-      <h3>Platné řetězce</h3>
-    </div>
-  </div>
-  <div class="row align-items-md-stretch">
-    <div class="col-md-12">
-      <div class="h-100 p-2 text-bg-success border rounded-3">
-<pre>
+      <div class="card text-white bg-success mb-3 h-100">
+        <div class="card-header">Platné řetězce</div>
+        <div class="card-body">
+<pre class="card-text">
 {% for snippet in pos_snips %}
 {{ snippet.text }}
 {% endfor %}
 </pre>
+        </div>
       </div>
     </div>
   </div>
   <!-- Invalid strings -->
-  <div class="row align-items-md-stretch">
+  <div class="row align-items-md-stretch mt-3">
     <div class="col-md-12">
-      <h3>Neplatné řetězce</h3>
-    </div>
-  </div>
-  <div class="row align-items-md-stretch">
-    <div class="col-md-12">
-      <div class="h-100 p-2 text-bg-danger border rounded-3">
-        
+      <div class="card text-white bg-danger mb-3 h-100">
+        <div class="card-header">Neplatné řetězce</div>
+        <div class="card-body">
 <pre>
 {% for snippet in neg_snips %}
 {{ snippet.text }}
 {% endfor %}
 </pre>
+        </div>
       </div>
     </div>
   </div>
@@ -74,30 +75,27 @@
 <div class="container-fluid p-4 bg-grey">
   <div class="row align-items-md-stretch">
     <div class="col-md-6">
-      <h3>Platné řetězce</h3>
-    </div>
-    <div class="col-md-6">
-      <h3>Neplatné řetězce</h3>
-    </div>
-  </div>
-  <div class="row align-items-md-stretch">
-    <div class="col-md-6">
-      <div class="h-100 p-2 text-bg-success border rounded-3">
-<pre>
+      <div class="card text-white bg-success mb-3 h-100">
+        <div class="card-header">Platné řetězce</div>
+        <div class="card-body">
+<pre class="card-text">
 {% for snippet in pos_snips %}
 {{ snippet.text }}
 {% endfor %}
 </pre>
+        </div>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="h-100 p-2 text-bg-danger border rounded-3">
-        
+      <div class="card text-white bg-danger mb-3 h-100">
+        <div class="card-header">Neplatné řetězce</div>
+        <div class="card-body">
 <pre>
 {% for snippet in neg_snips %}
 {{ snippet.text }}
 {% endfor %}
 </pre>
+        </div>
       </div>
     </div>
   </div>
@@ -131,23 +129,100 @@
     </div>
   </div>
   {% endif %}
-  {% if bad_pos %}
-  nematchuje tyto pozitivni
-  <pre>
-  {% for snippet in bad_pos %}
-  {{ snippet.text }}
-  {% endfor %}
-  </pre>
-  {% endif %}
-  {% if bad_neg %}
-  matchuje tyto negativni
-  <pre>
-  {% for snippet in bad_neg %}
-  {{ snippet.text }}
-  {% endfor %}
-  </pre>
-  {% endif %}
 </form>
 
+
+<!-- Invalid short matches reporting -->
+{% if task.num != 6 %}
+  <div class="container-fluid p-4">
+    <div class="row align-items-md-stretch">
+      {% if bad_pos %}
+      <div class="col-md-6">
+        <div class="card border-danger mb-3">
+          <div class="card-header">Nezachycené platné řetězce</div>
+          <div class="card-body text-danger">
+<pre class="card-text">
+{% for snippet in bad_pos %}
+{{ snippet.text }}
+{% endfor %}
+</pre>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if bad_neg %}
+      <div class="col-md-6">
+        <div class="card border-danger mb-3">
+          <div class="card-header">Zachycené neplatné řetězce</div>
+          <div class="card-body text-danger">
+<pre class="card-text">
+{% for snippet in bad_neg %}
+{{ snippet.text }}
+{% endfor %}
+</pre>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+<!-- Invalid long matches reporting -->
+{% if task.num == 6 %}
+<div class="container-fluid p-4">
+  <!-- Valid strings -->
+  {% if bad_pos %}
+  <div class="row align-items-md-stretch">
+    <div class="col-md-12">
+      <div class="card border-danger mb-3">
+        <div class="card-header">Nezachycené platné řetězce</div>
+        <div class="card-body text-danger">
+<pre class="card-text">
+{% for snippet in bad_pos %}
+{{ snippet.text }}
+{% endfor %}
+</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if bad_neg %}
+  <!-- Invalid strings -->
+  <div class="row align-items-md-stretch mt-3">
+    <div class="col-md-12">
+      <div class="card border-danger mb-3">
+        <div class="card-header">Zachycené neplatné řetězce</div>
+        <div class="card-body text-danger">
+<pre class="card-text">
+{% for snippet in bad_neg %}
+{{ snippet.text }}
+{% endfor %}
+</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+
+<div class="container p-4">
+  <!-- Help accordion -->
+  <div class="accordion" id="navod">
+    <!-- Regex intro -->
+    <div class="accordion-item border-primary">
+      <h2 class="accordion-header" id="helpOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHelp" aria-expanded="true" aria-controls="collapseHelp">
+          Nápověda k regexům
+        </button>
+      </h2>
+      <div id="collapseHelp" class="accordion-collapse collapse show" aria-labelledby="helpOne">
+        {% include "./regex-help.html" %}
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

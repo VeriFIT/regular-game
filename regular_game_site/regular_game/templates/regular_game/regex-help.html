@@ -1,0 +1,41 @@
+<div class="accordion-body">
+  <p>
+    <strong>Popis regulárních výrazů.</strong>Obecně se dá říct, že regulární výraz je textový řetězec, který slouží jako vzor pro vyhledávání textu.
+    Abychom mohli definovat takový vzor (regex) obecně, tak musíme být schopni zapsat jak <span class="text-primary">výskyt konkrétních znaků</span> v prohledávaném řetězci (např. symbol <code>a</code>),
+    tak <span class="text-primary">speciální pomocné znaky</span>, např. <code>.</code> pro výskyt libovolného symbolu nebo <code>+</code> pro libovolný kladný počet opakovaní daného symbolu (nebo skupiny symbolů).
+  </p>
+    
+  <ul>
+    <li><code>a</code>: zachytí text, ve kterém se kdekoliv vyskytuje symbol <code>a</code>, propustí ostatní texty (podobně pro ostatní symboly)</li>
+    <ul>
+      <li>příklady zachycení: <code>Gargamel</code>, <code>Jirka</code>, <code>Šmoulinka</code>, <code>Kobyla má malý bok</code></li>
+      <li>příklady propuštení: <code>hobit</code>, <code>Andrej</code> (<code>A</code> a <code>a</code> jsou různé symboly!), <code>jáhly</code> (<code>á</code> a <code>a</code> jsou různé symboly)</li>
+    </ul>
+
+    <li><code>abc</code>: zachytí text, ve kterém se kdekoliv vyskytuje řetězec <code>abc</code></li>
+    <ul>
+      <li>příklady zachycení: <code>mám rád časopis abc</code>, <code>abcdefghijklmnopqrstuvwzyx</code></li>
+      <li>příklady propuštení: <code>babička</code></li>
+    </ul>
+  
+    <li><code>^ahoj</code>: zachytí text, ve kterém je řetězec <code>ahoj</code> na začátku řádku</li>
+
+    <li><code>konec$</code>: zachytí text, ve kterém je řetězec <code>konec</code> na konci řádku</li>
+
+    <li><code>(jedna)|(dva)</code>: zachytí text, ve kterém se vyskytuje řetězec <code>jedna</code> nebo řetězec <code>dva</code> (pozor na nutnost použití závorek!)</li>
+
+    <li>TODO: <code>.</code></li>
+
+    <li><code>\x</code>: ruší speciální význam symbolu <code>x</code></li>
+    <ul>
+      <li>příklady zachycení pro <code>\(pozn\.</code>: <code>v létě bývá teplo (pozn. v zimě zase zima)</code> (ruší se speciální význam symbolu <code>(</code>)</li>
+      <li>příklady propuštení pro <code>\(pozn\.</code>: <code>na jaře se probouzí plazi (poznamenala ještěrka)</code> (ruší se speciální význam symbolů <code>(</code> a <code>.</code>)</li>
+    </ul>
+
+    <li>TODO: <code>[sym1-sym2]</code></li>
+
+    <li>TODO: <code>?</code>, <code>+</code>, <code>*</code></li>
+
+    <li>TODO: <code>{num1}</code>, <code>{num1,num2}</code></li>
+  </ul>
+</div>

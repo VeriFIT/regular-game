@@ -13,53 +13,148 @@
     </form>
   </div>
 
-  
   {% else %}
-  <!-- Name form -->
-  <form autocomplete="off" action="{% url 'regular_game:start_game' %}" method="post">
-    {% csrf_token %}
-    <div class="row mb-3">
-      Zlý čaroděj Gargamel chce ovládnout svět a jen Ty mu v tom můžeš zabránit!
-      <div class="col-sm-4"></div>
-      <label class="col-sm-1 col-form-label text-end" for="plname">Jméno:</label>
-      <div class="col-sm-2">
-        <input type="text" class="form-control" id="plname" name="plname" placeholder="Zadej své jméno">
+
+  <div class="container">
+    <!-- Intro -->
+    <h4 class="text-center">Zlý čaroděj Gargamel chce ovládnout svět a jen Ty mu v tom můžeš zabránit!</h4>
+    <img class="mx-auto d-block mb-3" src="http://static1.wikia.nocookie.net/__cb20130715165412/smurfsfanon/images/3/3b/Gargamel_(SA).gif" alt="Gargamel" width="300"/>
+
+    <h1 class="text-center mb-3">Za koho chceš hrát?</h1>
+    <!-- Start game form -->
+    <form autocomplete="off" action="{% url 'regular_game:start_game' %}" method="post">
+      {% csrf_token %}
+      <!-- Avatar Selection -->
+      <div class="row row-cols-1 row-cols-md-3 g-5">
+        <!-- Chuck Norris -->
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img class="card-img-top" src="https://c.tenor.com/_jbZnDIerhwAAAAM/4th-of-july-independence-day.gif" alt="Čak"/>
+            <div class="card-body d-flex flex-column">
+              <input type="radio" class="btn-check" name="avatar" id="chuck" checked>
+              <label class="btn btn-outline-primary w-100 mt-auto" for="chuck">Čak Noris</label>
+            </div>
+          </div>
+        </div>
+        <!-- Macgyver -->
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img class="card-img-top" src="https://c.tenor.com/JOX66MJe7DwAAAAM/mac-gyver-smiling.gif" alt="Mekgajvr"/>
+            <div class="card-body d-flex flex-column">
+              <input type="radio" class="btn-check" name="avatar" id="macgyver">
+              <label class="btn btn-outline-primary w-100 mt-auto" for="macgyver">Mekgajvr</label>
+            </div>
+          </div>
+        </div>
+        <!-- Pikachu -->
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img class="card-img-top" src="https://c.tenor.com/tZVpbfTIjNMAAAAM/pikachu.gif" alt="Pikaču"/>
+            <div class="card-body d-flex flex-column">
+              <input type="radio" class="btn-check" name="avatar" id="pikachu">
+              <label class="btn btn-outline-primary w-100 mt-auto" for="pikachu">Pikaču</label>
+            </div>
+          </div>
+        </div>
+        <!-- Agent Smith -->
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img class="card-img-top" src="https://i.pinimg.com/originals/13/6c/30/136c305a1fd5b8ea73bdac25b67bfd02.jpg" alt="Agent Smith"/>
+            <div class="card-body d-flex flex-column">
+              <input type="radio" class="btn-check" name="avatar" id="smith">
+              <label class="btn btn-outline-primary w-100 mt-auto" for="smith">Agent Smith</label>
+            </div>
+          </div>
+        </div>
+        <!-- Agent 007 -->
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img class="card-img-top" src="https://cpasvrai.com/wp-content/uploads/2016/10/agent-007.jpg" alt="Agent 007"/>
+            <div class="card-body d-flex flex-column">
+              <input type="radio" class="btn-check" name="avatar" id="007">
+              <label class="btn btn-outline-primary w-100 mt-auto" for="007">Agent 007</label>
+            </div>
+          </div>
+        </div>
+        <!-- Bureš -->
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img class="card-img-top" src="https://compote.slate.com/images/05a4298a-2eb6-4346-a8f8-2c80f34aaa98.jpg" alt="Agent Bureš"/>
+            <div class="card-body d-flex flex-column">
+              <input type="radio" class="btn-check" name="avatar" id="bures">
+              <label class="btn btn-outline-primary w-100 mt-auto" for="bures">Agent Bureš</label>
+            </div>
+          </div>
+        </div>
+        <!-- Tomas Vojnar -->
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img class="card-img-top" src="https://www.fit.vut.cz/person-photo/2491/?transparent=1" alt="Tomáš Vojnar"/>
+            <div class="card-body d-flex flex-column">
+              <input type="radio" class="btn-check" name="avatar" id="vojnar">
+              <label class="btn btn-outline-primary w-100 mt-auto" for="vojnar">Tomáš Vojnar</label>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-      <img src="http://static1.wikia.nocookie.net/__cb20130715165412/smurfsfanon/images/3/3b/Gargamel_(SA).gif" alt="Gargamel" width="300"/>
-        Za koho chceš hrát?
-        <img src="https://c.tenor.com/_jbZnDIerhwAAAAM/4th-of-july-independence-day.gif" alt="Čak" caption width="300"/>
-        <label for="chuck">Čak Noris</label>
-        <input type="radio" id="chuck" name="chuck" checked=true><br>
-        <img src="https://c.tenor.com/JOX66MJe7DwAAAAM/mac-gyver-smiling.gif" alt="Mekgajvr" width="300"/>
-        <label for="macgyver">Mekgajvr</label>
-        <input type="radio" id="macgyver" name="macgyver"><br>
-        <img src="https://c.tenor.com/tZVpbfTIjNMAAAAM/pikachu.gif" alt="Pikaču" caption width="300"/>
-        <label for="pikachu">Pikaču</label>
-        <input type="radio" id="pikachu" name="pikachu"><br>
-        <img src="https://i.pinimg.com/originals/13/6c/30/136c305a1fd5b8ea73bdac25b67bfd02.jpg" alt="Agent Smith" caption width="300"/>
-        <label for="smith">Agent Smith</label>
-        <input type="radio" id="smith" name="smith"><br>
-        <img src="https://cpasvrai.com/wp-content/uploads/2016/10/agent-007.jpg" alt="Agent 007" caption width="300"/>
-        <label for="007">Agent 007</label>
-        <input type="radio" id="007" name="007"><br>
-        <img src="https://compote.slate.com/images/05a4298a-2eb6-4346-a8f8-2c80f34aaa98.jpg" alt="Agent Bureš" caption width="300"/>
-        <label for="bures">Agent Bureš</label>
-        <input type="radio" id="bures" name="bures"><br>
+
+      <!-- Name form -->
+      <h1 class="text-center mb-3 mt-5">Jak se budeš jmenovat?</h1>
+      <div class="row g-3 justify-content-md-center">
+        <div class="col-auto">
+          <input type="text" class="form-control" id="plname" name="plname" placeholder="Zadej své jméno">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary px-4">Hrát</button>
+        </div>
       </div>
-      <div class="col-sm-1">
-        <button type="submit" class="btn btn-primary">Nová hra</button>
+
+      {% if error_message %}
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="alert alert-danger col-sm-4">
+            <strong>Chyba!</strong> {{ error_message }}
+          </div>
+        </div>
+      {% endif %}
+    </form>
+
+    <!-- Help accordions -->
+    <div class="accordion mt-5" id="navod">
+      <!-- How to play -->
+      <div class="accordion-item border-primary">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            Jak hrát?
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
+          <div class="accordion-body">
+            <p><strong>Princip hry.</strong> Po vybrání avatara a zadání svého jména Tě bude čekat několik úkolů.
+            V každém úkolu budou zadány dvě množiny textových řetězců: <span class="text-success">množina platných řetězců</span> a <span class="text-danger">množina neplatných řetězců</span>.
+            Tvým úkolem je nalézt tzv. <strong>regex</strong> (<strong>reg</strong>ular <strong>ex</strong>pression, česky <em>regulární výraz</em>),
+            který zachytí všechny platné řetězce a propustí všechny neplatné řetězce.</p>
+
+
+            <p>Cílem je vymyslet pro každý úkol co nejkratší možný regex: čím kratší regex vymyslíš, tím lepší skóre za daný úkol obdržíš.
+            V tomto případě platí, že <u>čím nižší skóre, tím lepší výsledek</u> a umístění v žebříčku řešitelů.
+            Pokud si nebudeš vědět rady s konkrétním úkolem, požádej o pomoc někoho z organizátorů nebo daný úkol přeskoč (za což ale obdržíš bodovou penalizaci).</p>
+          </div>
+        </div>
+      </div>
+      <!-- Regex intro -->
+      <div class="accordion-item border-primary">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Co jsou regexy?
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+          {% include "./regex-help.html" %}
+        </div>
       </div>
     </div>
-    {% if error_message %}
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <div class="alert alert-danger col-sm-4">
-        <strong>Chyba!</strong> {{ error_message }}
-      </div>
-    </div>
-    {% endif %}
-  </form>
+  </div>
   {% endif %}
 </div>
 
@@ -83,8 +178,8 @@
       <tr>
           <td>{{ forloop.counter }}</td>
           <td>{{ player.name }}</td>
-          <td>{{ player.time_begin }}</td>
-          <td>{{ player.duration }}</td>
+          <td>{{ player.time_begin_str }}</td>
+          <td>{{ player.duration_str }}</td>
           <td>{{ player.score }}</td>
       </tr>
       {% endfor %}

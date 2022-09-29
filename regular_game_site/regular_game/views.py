@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 
-from datetime import datetime
+from datetime import datetime, timedelta
 import re
 
 from .models import *
@@ -35,7 +35,8 @@ def start_game(request):
 
     player = Player()
     player.name = plname
-    player.time_begin = datetime.now()
+    # Quick timezone hack
+    player.time_begin = datetime.now() + timedelta(hours=2)
     player.score = 0
     player.next_task = 1
     player.save()
@@ -72,7 +73,8 @@ def task(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
     if player.next_task == TASKS_CNT + 1:
         player.finished = True
-        player.time_end = datetime.now()
+        # Quick timezone hack
+        player.time_end = datetime.now() + timedelta(hours=2)
         player.save()
         return HttpResponseRedirect(reverse('regular_game:endgame', args=(player.pk,)))
     else:

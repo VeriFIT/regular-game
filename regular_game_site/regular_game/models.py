@@ -17,6 +17,16 @@ class Player(models.Model):
     def duration(self):
         return self.time_end - self.time_begin
 
+    @property
+    def time_begin_str(self):
+        return self.time_begin.strftime("%d.%m.%Y %H:%M:%S")
+
+    @property
+    def duration_str(self):
+        dur = self.time_end - self.time_begin
+        hours, minutes = dur.seconds // 3600, dur.seconds %3600//60
+        seconds = dur.seconds - hours*3600 - minutes*60 + dur.microseconds / 1e6
+        return f"{hours}h {minutes}m {seconds:.2f}s"
 
 # A task - one step of the game
 class Task(models.Model):
