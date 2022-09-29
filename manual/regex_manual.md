@@ -21,5 +21,5 @@
 * `konec$` - zachytí text, ve kterém je řetězec `konec` na konci řádku
 * `(jedna)|(dva)` - zachytí text, ve kterém se vyskytuje řetězec `jedna` nebo řetězec `dva` (pozor na nutnost použití závorek pro řetězce delší než jeden znak!)
 * `\x` - ruší speciální význam symbolu `x`:
-  * příklad zachycení pro regex`\(pozn\.`: `v létě bývá teplo (pozn. v zimě zase zima)` (ruší se speciální význam symbolu `(`)
+  * příklad zachycení pro regex `\(pozn\.`: `v létě bývá teplo (pozn. v zimě zase zima)` (ruší se speciální význam symbolu `(`)
   * příklad propuštění pro regex `\(pozn\.`: `na jaře se probouzí plazi (poznamenala ještěrka)` (ruší se speciální význam symbolů `(` a `.`)
