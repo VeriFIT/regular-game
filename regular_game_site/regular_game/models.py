@@ -37,9 +37,9 @@ class Task(models.Model):
     best_solution_player = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        if best_solution_player:
-            best_player_name = best_solution_player.name
-            best_sol_len = len(best_solution)
+        if self.best_solution_player:
+            best_player_name = self.best_solution_player.name
+            best_sol_len = len(self.best_solution)
         else:
             best_player_name = ""
             best_sol_len = 0
