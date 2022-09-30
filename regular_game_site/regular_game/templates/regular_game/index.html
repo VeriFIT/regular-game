@@ -7,7 +7,8 @@
   {% if player %}
     {% if player.score < 105 %}
       <div class="alert alert-success text-center">
-        <strong>Gratulujeme, podařilo se Ti Gargamela porazit!</strong> Získané body: <strong>{{ player.score }}</strong>.
+        <strong>Gratulujeme, podařilo se Ti Gargamela porazit!</strong> Získané body: <strong>{{ player.score }}</strong>.<br>
+        <strong>Kam dál?</strong> Vyzkoušej další zábavné <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer">regexové hlavolamy</a>.
         <img class="mx-auto d-block mb-3" src="https://clipground.com/images/trophy-clipart-19.jpg" alt="Gargamel" width="300"/>
         <form action="{% url 'regular_game:index' %}" method="get">
           {% csrf_token %}
@@ -165,6 +166,8 @@
             <p>Cílem je vymyslet pro každý úkol co nejkratší možný regex: čím kratší regex vymyslíš, tím lepší skóre za daný úkol obdržíš.
             V tomto případě platí, že <u>čím nižší skóre, tím lepší výsledek</u> a umístění v žebříčku řešitelů.
             Pokud si nebudeš vědět rady s konkrétním úkolem, požádej o pomoc někoho z organizátorů nebo daný úkol přeskoč (za což ale obdržíš 30 trestných bodů).</p>
+
+            <p>Pokud Tě po této hře regexy zaujmou a budeš mít chuť na další hlavolamy, můžeš vyzkoušet <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer"><strong>regexové křížovky</strong></a>.</p>
           </div>
         </div>
       </div>
