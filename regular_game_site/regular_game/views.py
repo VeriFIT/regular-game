@@ -21,7 +21,9 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return at most 10 players with the highest scores."""
-        return Player.objects.filter(finished=True).order_by('score')[:10]
+        highscore = Player.objects.filter(finished=True).order_by('score')[:10]
+        highscore = sorted(highscore, key = lambda x: (x.score, x.duration))
+        return highscore
 
 # a method for starting the game
 def start_game(request):
