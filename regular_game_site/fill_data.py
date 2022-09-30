@@ -72,7 +72,7 @@ create_task(
         "I am writing you to seek your assistance to transfer our cash of ($12,000,000 USD)."
         ],
     neg_snip=[
-        "The company said it would post a net loss of 23 million euros ($23 million).",
+        "The company said it would post a net loss of 23 million euros (US$23 million).",
         "*Proprietary auto routing technology | *$9.99 commission"
         ]
 )
@@ -83,7 +83,7 @@ create_task(
     title="Soukromé zprávy",
     text="Pozor, Gargamel se snaží dostat k soukromým zprávám Tvojí mámy!  Zabraň mu v tom!",
     pos_snip=[
-        "Hello cindy, running late I've been stopped by a train :)",
+        "Hello cindy, running late I've been stopped by a train :).",
         "Ok. :)",
         "How much do i owe you. Not sure what tickets cost these days. :)",
         "Ten bucks, I think :)"
@@ -103,12 +103,12 @@ create_task(
     pos_snip=[
         "For your knowledge, 25% of this fund $25,000,000.00 will be given to you.",
         "It is the sum of US$27,000,000.00 (TWENTY SEVEN MILLION UNITED STATES DOLLARS) cash.",
-        "I am writing you to seek your assistance to transfer our cash of ($12,000,000.00)."
+        "I am writing you to seek your assistance to transfer our cash of ($12,000,000)."
         ],
     neg_snip=[
-        "The company said it would post a net loss of 23 million euros ($23 million).",
-        "License: Free to try; $1,000.00 to buy",
-        "*Proprietary auto routing technology | *$9.99 commission"
+        "The company said it would post a net loss of 23 million euros (US$23 million).",
+        "License: Free to try; $100,000.00 to buy",
+        "*Proprietary auto routing technology | *$9.00 commission"
         ]
 )
 
@@ -118,14 +118,14 @@ create_task(
     text="Gargamel se snaží pomocí lživých tweetů obelstít veřejnost.  Najdi regex, který je správně detekuje.",
     # text="Pro svůj výzkum potřebuješ dataset propagačních tweetů z Twitteru. Najdi regex, který je korektně detekuje.",
     pos_snip=[
-        "RT @4EverMaheshFan: Just came out of the #AvengersEndgame premiere!! I'm at a lost for words!!",
+        "RT @4EverMahesh: Just came out of the #AvengersEndgame premiere!! I'm at a lost for words!!",
         "@mikefish  Fair enough. But i have the #Kindle2 and I think it's perfect.",
         "BIG NEWS Just got a sneak peak at a new #iPhone promo poster.",
-        "HTML 5 Demos! Lots of great stuff to come! Yes, I'm excited. #googleio"
+        "HTML 5 Demos! Lots of great stuff to come! Yyeess, I'm excited. #googleio"
         ],
     neg_snip=[
-        "Beginning JavaScript and CSS Development with jQuery #javascript #css #jquery",
-        "@stevethegoose We had one in your honor while watching the Avengers.",
+        "Beginning JavaScript and CSS Development with jQuery Today #javascript #css #jquery",
+        "@stevethegoose I had one in your honor while watching the Avengers.",
         "Even for researchers the information provided is less than you can get from #google or #wikipedia",
         "#lebron best athlete of our generation, if not all time (basketball related)"
         ]
@@ -171,9 +171,9 @@ create_task(
         '157.55.39.34 - - [18/Feb/2019:03:23:07 +0100] "GET /robots.txt HTTP/1.1" 404 3770 "-" "Mozilla/5.0 (compatible; bingbot/2.0)"'
         ],
     neg_snip=[
-        '2001:67c:1220:80c:d4:985a:df2c:d717 - - [13/Feb/2019:07:49:01 +0100] "GET / HTTP/1.1" 200 58341 "-" "curl/7.61.1"',
-        '198.27.69.191 - - [08/Feb/2019:09:45:38 +0100] "GET / HTTP/1.1" 200 24041 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0"',
-        '157.55.39.35 - - [20/Feb/2019:13:00:36 +0100] "GET /robots.txt HTTP/1.1" 200 3786 "-" "Mozilla/5.0 (compatible; bingbot/2.0; 404 )"',
-        '46.229.168.140 - - [10/Feb/2019:16:04:45 +0100] "POST /robots.txt HTTP/1.1" 404 3761 "-" "Mozilla/5.0 (compatible; SemrushBot/3~bl;)"'
+        '2001:67c:1220:80c:d4:985a:df2c:d717 - - [13/Feb/2019:07:49:01 +0100] "GET / HTTP/1.1" 200 57741 "-" "curl/7.61.1"',
+        '66.249.82.47 - - [08/Feb/2019:09:45:38 +0100] "GET / HTTP/1.1" 200 24041 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0"',
+        '46.17.33.173 - - [20/Feb/2019:23:56:36 +0100] "GET /robots.txt HTTP/1.1" 200 2151 "-" "Mozilla/5.0 (compatible; bingbot/2.0; 404 )"',
+        '157.55.39.34 - - [10/Feb/2019:16:04:45 +0100] "POST /robots.txt HTTP/1.1" 404 3703 "-" "Mozilla/5.0 (compatible; SemrushBot/3~bl;)"'
         ]
 )
