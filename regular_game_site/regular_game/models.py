@@ -37,7 +37,7 @@ class Task(models.Model):
     best_solution_player = models.ForeignKey(Player, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f"{self.num}: {self.title}"
+        return f"{self.num}: {self.title} (record - {best_solution_player.name}: {len(best_solution)})"
 
 
 # a snippet of text used as a (counter)example for a task
