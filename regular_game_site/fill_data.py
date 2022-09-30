@@ -37,21 +37,21 @@ create_task(
     title="Tutorial 2",
     text="Další jednoduchý úkol.  Tady můžeš zkusit najít podřetězec který je na všech řádcích vlevo a není na žádném řádku vpravo.",
     pos_snip=["dkjfl_abc_kldjfals", "jkdlajfl_abc_adrjfkal", "uiks34_abc_ffm"],
-    neg_snip=["abababababababab", "abbcabbcabbcabbca", "jkjlkfkladjlvd", "dkfjalskvjlckjnaiejf94rasd3"]
+    neg_snip=["abababababababab", "abbcabbc_abbcabbca", "jkjlkfkladjlvd", "dkfjalskvjlckjnaiejf94rasd3"]
 )
 
 create_task(
     title="Tutorial 3",
     text="Jak vyřešíš tento úkol?  Tady se Ti může hodit konstrukce <tt>.*</tt>, která zachytí libovolný řetězec.",
-    pos_snip=["XaaaaaaaaaaaaaaaaaaX", "YbbbbbbbbbbbbbbbbbbbbbbbbY"],
-    neg_snip=["XaaaaaaaaaaaaaaaaaaY", "YbbbbbbbbbbbbbbbbbbbbbbbbX"]
+    pos_snip=["XaaaaaaaaaaaaaaaaaaX", "YaaaaaaaaaaaaaaaaaaaaaaaaY"],
+    neg_snip=["XaaaaaaaaaaaaaaaaaaY", "YaaaaaaaaaaaaaaaaaaaaaaaaX"]
 )
 
 create_task(
     title="Tutorial 4",
     text="U tohoto úkolu se Ti můžou hodit konstrukce \"<tt>[</tt>\", \"<tt>]</tt>\" pro množinu symbolů a \"<tt>{</tt>\", \"<tt>}</tt>\" pro počet opakování.",
     pos_snip=["12345", "84579", "12783", "45178", "34791"],
-    neg_snip=["12a43", "a3452", "7b823", "234k3", "2422a"]
+    neg_snip=["12a43", "a3452", "7b823", "234k3", "2422a", "5423"]
 )
 
 create_task(
