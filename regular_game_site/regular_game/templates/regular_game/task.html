@@ -105,21 +105,29 @@
 <!-- Submit Form -->
 <form autocomplete="off" action="{% url 'regular_game:answer' player.id %}" method="post">
   {% csrf_token %}
-  <div class="row mb-3 bg-grey py-2">
+  <div class="row bg-grey py-2">
     <div class="col-sm-3"></div>
     <label class="col-sm-1 col-form-label" for="regex"><strong>Regex:</strong></label>
-    <div class="col-sm-4 mb-3">
+    <div class="col-sm-4">
       {% if regex %}
-        <input type="text" class="form-control" id="regex" name="regex" value="{{ regex }}">
+        <input type="text" class="form-control" id="regex" name="regex" value="{{ regex }}" oninput="countChars('regex', 'displayto')">
       {% else %}
-        <input type="text" class="form-control" id="regex" name="regex" placeholder="Zadejte regex">
+        <input type="text" class="form-control" id="regex" name="regex" placeholder="Zadejte regex" oninput="countChars('regex', 'displayto')">
       {% endif %}
     </div>
     <div class="col-sm-4">
-      <button type="submit" name="submit" class="mx-1 btn btn-primary">Odpovědět</button>
+      <button type="submit" name="submit" class="mx-1 btn btn-success">Odpovědět</button>
       <button type="submit" name="skip" class="mx-1 btn btn-warning">Přeskočit</button>
       <button type="submit" name="giveup" class="mx-1 btn btn-danger">Ukončit</button>
     </div>
+  </div>
+  <div class="row mb-3 bg-grey py-2">
+    <div class="col-sm-3"></div>
+    <span class="col-sm-1"><strong>Počet znaků:</strong></span>
+    <div class="col-sm-4 mb-3">
+      <span id="displayto">{{ regex_len }}</span>
+    </div>
+    <div class="col-sm-4"></div>
   </div>
   {% if error_message %}
   <div class="row">

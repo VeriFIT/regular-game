@@ -55,6 +55,7 @@ def render_next_task_with(request, player, regex=None, error_msg=None, bad_pos=N
                       'player': player,
                       'task': task,
                       'regex': regex,
+                      'regex_len': len(regex) if regex else 0,
                       'pos_snips': pos_snips,
                       'neg_snips': neg_snips,
                       'tasks_cnt': get_tasks_cnt(),
