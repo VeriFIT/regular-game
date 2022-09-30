@@ -8,8 +8,8 @@ import re
 
 from .models import *
 
-# number of tasks
-TASKS_CNT = Task.objects.all().order_by('-num')[0].num
+def get_tasks_cnt():
+    return Task.objects.all().order_by('-num')[0].num
 
 # penalty for skipping a task
 SKIP_PENALTY = 30
@@ -57,9 +57,9 @@ def render_next_task_with(request, player, regex=None, error_msg=None, bad_pos=N
                       'regex': regex,
                       'pos_snips': pos_snips,
                       'neg_snips': neg_snips,
-                      'tasks_cnt': TASKS_CNT,
+                      'tasks_cnt': get_tasks_cnt(),
                       'tasks_done': task.num - 1,
-                      'progress': 100 / TASKS_CNT * (task.num - 1),
+                      'progress': 100 / get_tasks_cnt() * (task.num - 1),
                       'error_message': error_msg,
                       'bad_pos': bad_pos,
                       'bad_neg': bad_neg,
@@ -71,7 +71,7 @@ def render_next_task_with(request, player, regex=None, error_msg=None, bad_pos=N
 # A page with one step of the game
 def task(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
-    if player.next_task == TASKS_CNT + 1:
+    if player.next_task == get_tasks_cnt() + 1:
         player.finished = True
         # Quick timezone hack
         player.time_end = datetime.now() + timedelta(hours=2)
@@ -90,8 +90,8 @@ def answer(request, player_id):
         player.save()
         return HttpResponseRedirect(reverse('regular_game:task', args=(player.pk,)))
     elif 'giveup' in request.POST:
-        player.score += (TASKS_CNT - player.next_task + 1) * SKIP_PENALTY
-        player.next_task = TASKS_CNT + 1
+        player.score += (get_tasks_cnt() - player.next_task + 1) * SKIP_PENALTY
+        player.next_task = get_tasks_cnt() + 1
         player.save()
         return HttpResponseRedirect(reverse('regular_game:task', args=(player.pk,)))
 
