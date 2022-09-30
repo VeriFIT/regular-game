@@ -11,7 +11,7 @@ class Player(models.Model):
     finished = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.name} ({self.score})"
+        return f"{self.name} (task: {self.next_task}, score: {self.score})"
 
     @property
     def duration(self):
