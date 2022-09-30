@@ -17,7 +17,8 @@
       </div>
     {% else %}
       <div class="alert alert-danger text-center">
-        <strong>Gargamel zvítězil a ovládl svět.</strong> Získané body: <strong>{{ player.score }}</strong>.        
+        <strong>Gargamel zvítězil a ovládl svět.</strong> Získané body: <strong>{{ player.score }}</strong>.<br>
+        <strong>Kam dál?</strong> Vyzkoušej další zábavné <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer">regexové hlavolamy</a>.
         <img class="mx-auto d-block mb-3" src="http://static1.wikia.nocookie.net/__cb20130715165412/smurfsfanon/images/3/3b/Gargamel_(SA).gif" alt="Gargamel" width="300"/>
         <form action="{% url 'regular_game:index' %}" method="get">
           {% csrf_token %}
