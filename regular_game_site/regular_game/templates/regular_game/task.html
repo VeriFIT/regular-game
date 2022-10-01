@@ -20,7 +20,8 @@
     </div>
     <div class="col text-end">
       {% if best_sol_len %}
-      <h3>Autor nejlepšího řešení: {{ best_sol_player.name }}</h3>
+      <!-- <h3>Autor nejlepšího řešení: {{ best_sol_player.name }}</h3> -->
+      <h3>Délka nejlepšího řešení: {{ best_sol_len }} (hráč "{{ best_sol_player.name }}")</h3>
       {% endif %}
     </div>
   </div>
