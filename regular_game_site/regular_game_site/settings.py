@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'regular_game.apps.RegularGameConfig',
+    'game23.apps.Game23Config',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
