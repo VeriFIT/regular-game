@@ -31,7 +31,7 @@ class IndexView(generic.ListView):
 # a method for starting the game
 def start_game(request):
     if 'plname' not in request.POST or not request.POST['plname']:
-        return render(request, 'regular_game/index.html', {
+        return render(request, 'game23/index.html', {
             'error_message': "Zadejte jméno hráče.",
             'highscore_list': IndexView().get_queryset()
         })
@@ -55,7 +55,7 @@ def render_next_task_with(request, player, regex=None, error_msg=None, bad_pos=N
     # snippets = task.snippet_set.all()
     # pos_snips = [snip for snip in snippets if snip.snip_type == 'Y']
     # neg_snips = [snip for snip in snippets if snip.snip_type == 'N']
-    return render(request, 'regular_game/task.html',
+    return render(request, 'game23/task.html',
                   {
                       'player': player,
                       'task': task,
@@ -85,3 +85,69 @@ def task(request, player_id):
         return HttpResponseRedirect(reverse('game23:endgame', args=(player.pk,)))
     else:
         return render_next_task_with(request, player)
+
+
+# a method for answering a task
+def answer(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    if 'skip' in request.POST:
+        player.score += SKIP_PENALTY
+        player.next_task += 1
+        player.save()
+        return HttpResponseRedirect(reverse('game23:task', args=(player.pk,)))
+    elif 'giveup' in request.POST:
+        player.score += (get_tasks_cnt() - player.next_task + 1) * SKIP_PENALTY
+        player.next_task = get_tasks_cnt() + 1
+        player.save()
+        return HttpResponseRedirect(reverse('game23:task', args=(player.pk,)))
+
+    task = get_object_or_404(Task, num=player.next_task)
+    # snippets = task.snippet_set.all()
+    # pos_snips = [snip for snip in snippets if snip.snip_type == 'Y']
+    # neg_snips = [snip for snip in snippets if snip.snip_type == 'N']
+
+    if 'regex' not in request.POST or not request.POST['regex']:
+        return render_next_task_with(request, player, error_msg="Zadejte regex!")
+
+    regex = request.POST['regex']
+    correct = True
+    # bad_pos = []
+    # bad_neg = []
+    # try:
+    #     for snip in pos_snips:   # we need to match all examples
+    #         if not re.search(regex, snip.text):
+    #             correct = correct and False
+    #             bad_pos += [snip]
+    #
+    #     for snip in neg_snips:   # we need to reject all counterexamples
+    #         if re.search(regex, snip.text):
+    #             correct = correct and False
+    #             bad_neg += [snip]
+    #
+    # except Exception as error:
+    #     return render_next_task_with(request, player, regex=regex, error_msg=f"Špatně zadaný regex! (popis chyby: \"{error}\")")
+
+    if not correct:
+        return render_next_task_with(request, player, regex, error_msg=f"Špatný regex \"{regex}\"!", bad_pos=bad_pos, bad_neg=bad_neg)
+
+    player.next_task += 1
+    player.score += len(regex)
+
+    if not task.best_solution or len(regex) < len(task.best_solution):
+        task.best_solution = regex
+        task.best_solution_player = player
+        task.save()
+
+    player.save()
+
+    return HttpResponseRedirect(reverse('game23:task', args=(player.pk,)))
+
+
+# end of game
+def endgame(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    return render(request, 'game23/index.html',
+                    {
+                        'player': player,
+                        'highscore_list': IndexView().get_queryset()
+                    })
