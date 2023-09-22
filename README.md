@@ -14,6 +14,8 @@ and go to [http://127.0.0.1:8000/game22/](http://127.0.0.1:8000/game22/)
 
 # Game23
 
+Make sure you have `z3` installed.
+
 ```
 pip3 install Django
 git clone https://github.com/VeriFIT/regular-game.git
