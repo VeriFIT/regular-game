@@ -5,7 +5,10 @@ from django.views import generic
 
 from datetime import datetime, timedelta
 
+# import z3
+
 from .models import *
+from .solver import cond_satisfied
 
 
 def get_tasks_cnt():
@@ -22,8 +25,8 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return at most 10 players with the highest scores."""
-        # highscore = Player.objects.filter(finished=True).order_by('score')[:10]
-        # highscore = sorted(highscore, key = lambda x: (x.score, x.duration))
+        highscore = Player.objects.filter(finished=True).order_by('score')[:10]
+        highscore = sorted(highscore, key = lambda x: (x.score, x.duration))
         highscore = []
         return highscore
 
@@ -50,25 +53,21 @@ def start_game(request):
 
 
 # common rendering of the task page
-def render_next_task_with(request, player, regex=None, error_msg=None, bad_pos=None, bad_neg=None):
+def render_next_task_with(request, player, result=None, error_msg=None, bad_cond=None):
     task = get_object_or_404(Task, num=player.next_task)
-    # snippets = task.snippet_set.all()
-    # pos_snips = [snip for snip in snippets if snip.snip_type == 'Y']
-    # neg_snips = [snip for snip in snippets if snip.snip_type == 'N']
     return render(request, 'game23/task.html',
                   {
                       'player': player,
                       'task': task,
-                      'regex': regex,
-                      'regex_len': len(regex) if regex else 0,
+                      'result': result,
+                      'result_len': len(result) if result else 0,
                       # 'pos_snips': pos_snips,
                       # 'neg_snips': neg_snips,
+                      'bad_cond': bad_cond,
                       'tasks_cnt': get_tasks_cnt(),
                       'tasks_done': task.num - 1,
                       'progress': 100 / get_tasks_cnt() * (task.num - 1),
                       'error_message': error_msg,
-                      'bad_pos': bad_pos,
-                      'bad_neg': bad_neg,
                       'best_sol_len': len(task.best_solution) if task.best_solution else None,
                       'best_sol_player': task.best_solution_player
                   })
@@ -102,39 +101,32 @@ def answer(request, player_id):
         return HttpResponseRedirect(reverse('game23:task', args=(player.pk,)))
 
     task = get_object_or_404(Task, num=player.next_task)
-    # snippets = task.snippet_set.all()
-    # pos_snips = [snip for snip in snippets if snip.snip_type == 'Y']
-    # neg_snips = [snip for snip in snippets if snip.snip_type == 'N']
 
-    if 'regex' not in request.POST or not request.POST['regex']:
-        return render_next_task_with(request, player, error_msg="Zadejte regex!")
+    if 'result' not in request.POST or not request.POST['result']:
+        return render_next_task_with(request, player, error_msg="Zadejte odpověď!")
 
-    regex = request.POST['regex']
+    result = request.POST['result']
     correct = True
-    # bad_pos = []
-    # bad_neg = []
-    # try:
-    #     for snip in pos_snips:   # we need to match all examples
-    #         if not re.search(regex, snip.text):
-    #             correct = correct and False
-    #             bad_pos += [snip]
-    #
-    #     for snip in neg_snips:   # we need to reject all counterexamples
-    #         if re.search(regex, snip.text):
-    #             correct = correct and False
-    #             bad_neg += [snip]
-    #
-    # except Exception as error:
-    #     return render_next_task_with(request, player, regex=regex, error_msg=f"Špatně zadaný regex! (popis chyby: \"{error}\")")
+
+    conditions = task.condition_set.all()
+    bad_cond = []
+
+    try:
+        for cond in conditions:   # we need to match all examples
+            if not cond_satisfied(cond, result):
+                correct = correct and False
+                bad_cond += [cond]
+    except Exception as error:
+        return render_next_task_with(request, player, regex=regex, error_msg=f"Špatně zadaná odpověď či jiná chyba! (popis chyby: \"{error}\")")
 
     if not correct:
-        return render_next_task_with(request, player, regex, error_msg=f"Špatný regex \"{regex}\"!", bad_pos=bad_pos, bad_neg=bad_neg)
+        return render_next_task_with(request, player, result, error_msg=f"Špatná odpověď \"{result}\"!", bad_cond=bad_cond)
 
     player.next_task += 1
-    player.score += len(regex)
+    player.score += len(result)
 
-    if not task.best_solution or len(regex) < len(task.best_solution):
-        task.best_solution = regex
+    if not task.best_solution or len(result) < len(task.best_solution):
+        task.best_solution = result
         task.best_solution_player = player
         task.save()
 

@@ -108,12 +108,12 @@
   {% csrf_token %}
   <div class="row bg-grey py-2">
     <div class="col-sm-3"></div>
-    <label class="col-sm-1 col-form-label" for="regex"><strong>Regex:</strong></label>
+    <label class="col-sm-1 col-form-label" for="result"><strong>Odpověď:</strong></label>
     <div class="col-sm-4">
-      {% if regex %}
-        <input type="text" class="form-control" id="regex" name="regex" value="{{ regex }}" oninput="countChars('regex', 'displayto')">
+      {% if result %}
+        <input type="text" class="form-control" id="result" name="result" value="{{ result }}" oninput="countChars('result', 'displayto')">
       {% else %}
-        <input type="text" class="form-control" id="regex" name="regex" placeholder="Zadejte regex" oninput="countChars('regex', 'displayto')">
+        <input type="text" class="form-control" id="result" name="result" placeholder="Zadejte odpověď" oninput="countChars('result', 'displayto')">
       {% endif %}
     </div>
     <div class="col-sm-4">
@@ -145,28 +145,14 @@
 {% if task.num != 11 %}
   <div class="container-fluid p-4">
     <div class="row align-items-md-stretch">
-      {% if bad_pos %}
+      {% if bad_cond %}
       <div class="col-md-6">
         <div class="card border-danger mb-3">
-          <div class="card-header">Nepodařilo se Ti zachytit tyto řetězce:</div>
+          <div class="card-header">Nepodařilo se Ti splnit tyto podmínky:</div>
           <div class="card-body text-danger">
 <pre class="card-text">
-{% for snippet in bad_pos %}
-{{ snippet.text }}
-{% endfor %}
-</pre>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% if bad_neg %}
-      <div class="col-md-6">
-        <div class="card border-danger mb-3">
-          <div class="card-header">Zachytil jsi omylem tyto řetězce:</div>
-          <div class="card-body text-danger">
-<pre class="card-text">
-{% for snippet in bad_neg %}
-{{ snippet.text }}
+{% for cond in bad_cond %}
+{{ cond.text }}
 {% endfor %}
 </pre>
           </div>
@@ -181,32 +167,15 @@
 {% if task.num == 11 %}
 <div class="container-fluid p-4">
   <!-- Valid strings -->
-  {% if bad_pos %}
+  {% if bad_cond %}
   <div class="row align-items-md-stretch">
     <div class="col-md-12">
       <div class="card border-danger mb-3">
-        <div class="card-header">Nepodařilo se Ti zachytit tyto řetězce:</div>
+        <div class="card-header">Nepodařilo se Ti splnit tyto podmínky:</div>
         <div class="card-body text-danger">
 <pre class="card-text">
-{% for snippet in bad_pos %}
-{{ snippet.text }}
-{% endfor %}
-</pre>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-  {% if bad_neg %}
-  <!-- Invalid strings -->
-  <div class="row align-items-md-stretch mt-3">
-    <div class="col-md-12">
-      <div class="card border-danger mb-3">
-        <div class="card-header">Zachytil jsi omylem tyto řetězce:</div>
-        <div class="card-body text-danger">
-<pre class="card-text">
-{% for snippet in bad_neg %}
-{{ snippet.text }}
+{% for cond in bad_cond %}
+{{ cond.text }}
 {% endfor %}
 </pre>
         </div>

@@ -46,3 +46,12 @@ class Task(models.Model):
             best_sol_len = 0
 
         return f"{self.num}: {self.title} (record - {best_player_name}: {best_sol_len})"
+
+# a condition that the answer of a task need to satisfy
+class Condition(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    text = models.TextField()
+    smt = models.TextField()
+
+    def __str__(self):
+        return f'{self.text}'

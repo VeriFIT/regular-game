@@ -6,11 +6,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE','regular_game_site.settings')
 import django
 django.setup()
 
-from game23.models import Task
+from game23.models import Task, Condition
 
 num = 1
 
-def create_task(title, text):
+def create_task(title, text, conditions):
     global num
     task = Task(
         num=num,
@@ -19,10 +19,18 @@ def create_task(title, text):
     task.save()
     num += 1
 
+    for (text, smt) in conditions:
+        task.condition_set.create(text=text, smt=smt)
+
+
 
 ############################### TUTORIAL ########################################
 create_task(
     title="Tutorial 1",
-    text="Před tím, než Tě pustíme na Gargamela, musíš projít krátkým tréninkem.  Napiš regex, který zachytí všechny řádky vlevo a propustí všechny řádky vpravo.  Nápovědu, jak psát regexy, můžeš najít níže.  Tady Ti můžou pomoci operátory \"<tt>|</tt>\" a \"<tt>[</tt>, <tt>]</tt>\". Nezapomeň, že čím kratší regex vytvoříš, tím lepší skóre budeš mít!"
+    text="Heslo musí obsahovat řetězec \"VeriFIT\" a navíc jeho první dva znaky musí odpovídat posledním dvěma znakům.",
+    conditions = [
+        ("musí obsahovat řetězec \"VeriFIT\"", "(assert (str.contains result \"VeriFIT\"))"),
+        ("první dva znaky musí odpovídat posledním dvěma znakům", "(assert (= (str.substr result 0 2) (str.substr result (- (str.len result) 2) 2)))"),
+    ]
 )
 
