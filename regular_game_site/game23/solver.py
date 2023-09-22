@@ -37,10 +37,12 @@ def cond_satisfied(cond, value):
                              )
 
     except Exception as error:
+        print(f"input: {smt_str}")
         print(f"error: {error}")
         return False
 
     if proc.returncode != 0:
+        print(f"input: {smt_str}")
         print(f"error: stdout = {proc.stdout}; stderr = {proc.stderr}")
         return False
 

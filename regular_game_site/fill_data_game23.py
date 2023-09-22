@@ -23,6 +23,8 @@ def create_task(title, text, conditions):
         task.condition_set.create(text=text, smt=smt)
 
 
+# clean
+Task.objects.all().delete()
 
 ############################### TUTORIAL ########################################
 create_task(
@@ -34,3 +36,14 @@ create_task(
     ]
 )
 
+create_task(
+    title="Tutorial 1",
+    text="Heslo musí mít délku alespoň osm znaků a musí obsahovat alespoň jedno malé písmeno anglické abecedy, jedno velké písmeno anglické abecedy, jednu číslici a musí to být palindrom (tj. čte se zepředu stejně jako zezadu).",
+    conditions = [
+        ("délka alespoň osm znaků", "(assert (<= 8 (str.len result)))"),
+        ("alespoň jedno malé písmeno anglické abecedy", "(assert (str.in_re result (re.++ (re.++ re.all (re.range \"a\" \"z\")) re.all)))"),
+        ("alespoň jedno velké písmeno anglické abecedy", "(assert (str.in_re result (re.++ (re.++ re.all (re.range \"A\" \"Z\")) re.all)))"),
+        ("alespoň jedno arabská číslice", "(assert (str.in_re result (re.++ (re.++ re.all (re.range \"0\" \"9\")) re.all)))"),
+        ("palindrom", "(assert (forall ((i Int)) (=> (and (<= 0 i) (< i (div (str.len result) 2))) (= (str.at result i) (str.at result (- (- (str.len result) i) 1))))))"),
+    ]
+)
