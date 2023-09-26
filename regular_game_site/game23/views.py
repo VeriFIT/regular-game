@@ -12,7 +12,10 @@ from .solver import cond_satisfied
 
 
 def get_tasks_cnt():
-    return Task.objects.all().order_by('-num')[0].num
+    task_with_highest_num = Task.objects.all().order_by('-num').first()
+    if task_with_highest_num:
+        return task_with_highest_num.num
+    return 0
 
 # penalty for skipping a task
 SKIP_PENALTY = 30
