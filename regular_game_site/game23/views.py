@@ -19,6 +19,8 @@ def get_tasks_cnt():
 
 # penalty for skipping a task
 SKIP_PENALTY = 30
+# penalty for a wrong answer
+WRONG_PENALTY = 2
 
 
 # Main page with high score chart
@@ -122,6 +124,8 @@ def answer(request, player_id):
         return render_next_task_with(request, player, regex=regex, error_msg=f"Špatně zadaná odpověď či jiná chyba! (popis chyby: \"{error}\")")
 
     if not correct:
+        player.score += WRONG_PENALTY
+        player.save()
         return render_next_task_with(request, player, result, error_msg=f"Špatná odpověď \"{result}\"!", bad_cond=bad_cond)
 
     player.next_task += 1
