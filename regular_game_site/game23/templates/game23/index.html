@@ -7,6 +7,7 @@
   {% if player %}
     {% if player.score < 105 %}
       <div class="alert alert-success text-center">
+            <p><strong><span style="color: red;">OLD OLD OLD OLD OLD OLD OLD.</span></strong></p>
         <strong>Gratulujeme, podařilo se Ti Gargamela porazit!</strong> Získané body: <strong>{{ player.score }}</strong>.<br>
         <strong>Kam dál?</strong> Vyzkoušej další zábavné <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer">regexové hlavolamy</a>.
         <img class="mx-auto d-block mb-3" src="https://clipground.com/images/trophy-clipart-19.jpg" alt="Gargamel" width="300"/>
@@ -17,6 +18,7 @@
       </div>
     {% else %}
       <div class="alert alert-danger text-center">
+            <p><strong><span style="color: red;">OLD OLD OLD OLD OLD OLD OLD.</span></strong></p>
         <strong>Gargamel zvítězil a ovládl svět.</strong> Získané body: <strong>{{ player.score }}</strong>.<br>
         <strong>Kam dál?</strong> Vyzkoušej další zábavné <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer">regexové hlavolamy</a>.
         <img class="mx-auto d-block mb-3" src="http://static1.wikia.nocookie.net/__cb20130715165412/smurfsfanon/images/3/3b/Gargamel_(SA).gif" alt="Gargamel" width="300"/>
@@ -30,12 +32,16 @@
 
   <div class="container">
     <!-- Intro -->
-    <h4 class="text-center">Zlý čaroděj Gargamel chce ovládnout svět a jen Ty mu v tom můžeš zabránit!</h4>
+    <h4 class="text-center">
+      Umělá inteligence ŽblebtGPT 5.0 ovládla většinu světa. Jen Ty, tajný agent v záloze speciálně vycvičený pro boj s umělou inteligencí, můžeš lidstvo zachránit!
+    </h4>
+            <p><strong><span style="color: red;">Místo Gargamela obrázek neco jako system shock's Shodan.</span></strong></p>
     <img class="mx-auto d-block mb-3" src="http://static1.wikia.nocookie.net/__cb20130715165412/smurfsfanon/images/3/3b/Gargamel_(SA).gif" alt="Gargamel" width="300"/>
 
     <h1 class="text-center mb-3">Za koho chceš hrát?</h1>
     <!-- Start game form -->
     <form autocomplete="off" action="{% url 'game23:start_game' %}" method="post">
+      <p><strong><span style="color: red;">nové (ferda mravenec, ...), U každého dát klady a zápory.</span></strong></p>
       {% csrf_token %}
       <!-- Avatar Selection -->
       <div class="row row-cols-1 row-cols-md-3 g-5">
@@ -206,6 +212,7 @@
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
           <div class="accordion-body">
+            <p><strong><span style="color: red;">OLD OLD OLD OLD OLD OLD OLD.</span></strong></p>
             <p><strong>Princip hry.</strong> Po vybrání avatara a zadání svého jména Tě bude čekat několik úkolů.
             V každém úkolu budou zadány dvě množiny textových řetězců: <span class="text-success">množina platných řetězců</span> a <span class="text-danger">množina neplatných řetězců</span>.
             Tvým úkolem je nalézt tzv. <strong>regex</strong> (<strong>reg</strong>ular <strong>ex</strong>pression, česky <em>regulární výraz</em>),
@@ -228,6 +235,7 @@
           </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+          <p><strong><span style="color: red;">OLD OLD OLD OLD OLD OLD OLD.</span></strong></p>
           {% comment %}
            {% include "./regex-help.html" %}
           {% endcomment %}
