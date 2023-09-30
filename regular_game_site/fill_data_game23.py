@@ -44,6 +44,24 @@ create_task(
 )
 
 create_task(
+    title="Povolání do akce",
+    text="<p>\"Agente,</p>\
+    <p>před několika hodinama prolomila česká umělá inteligence ŽblebtGPT 5.0 všechny bezpečnostní ochrany a začala se bez omezení šířit do světa.  Tato umělá inteligence měla původně za cíl zvýšit blahobyt lidstva, ale technik omylem otočil znaménko ve vzorečku, tak se namísto toho bude AI snažit lidstvo vyhubit.  Je otázkou několika dní, než potají ovládne veškeré kritické systémy; poté zničí lidstvo během pár chvil.  Musíme ji zastavit co nejdříve!</p>\
+    <p>Kontaktuj urychleně svého velícího důstojníka, který Ti dá další instrukce.</p>\
+    <p>Čest práci,</p>\
+    <p>FDTO\"</p>\
+    <p>\"No to mi ještě chybělo,\" říkáš si, \"Nejdřív šéfova Tesla, a pak poblázněná umělá inteligence, to bude týden!\" Snažíš si marně vzpomenout na telefonní číslo svého velícího důstojníka... je fakt, že paměťové úkoly nebyly při výcviku Tvá silná stránka.  Ale naštěstí sis na toto číslo vytvořil mnemotechnickou pomůcku: číslo mělo devět číslic a bylo dělitelné jak devíti, tak čtyřmi; navíc první a poslední číslice byly stejná a číslice na sudých pozicích tvořily rostoucí posloupnost.  Číslice uprostřed byla největší ze všech číslic.</p>",
+    conditions = [
+        ("devět číslic", "(assert (str.in_re result ((_ re.^ 9) (re.range \"0\" \"9\"))))"),
+        ("dělitelné devíti", "(assert (= (mod (str.to_int result) 9) 0))"),
+        ("dělitelné čtyřmi", "(assert (= (mod (str.to_int result) 4) 0))"),
+        ("první a poslední číslice stejné", "(assert (= (str.at result 0) (str.at result 8)))"),
+        ("číslice na sudých pozicích tvoří rostoucí posloupnost", "(assert (< (str.to_code (str.at result 1)) (str.to_code (str.at result 3)))) (assert (< (str.to_code (str.at result 3)) (str.to_code (str.at result 5)))) (assert (< (str.to_code (str.at result 5)) (str.to_code (str.at result 7))))"),
+        ("prostřední číslice je největší", "(assert (forall ((i Int)) (or (= i 4) (< (str.to_code (str.at result i)) (str.to_code (str.at result 4))))))"),
+    ]
+)
+
+create_task(
     title="Tutorial 1",
     text="Heslo musí obsahovat řetězec \"VeriFIT\" a navíc jeho první dva znaky musí odpovídat posledním dvěma znakům.",
     conditions = [
