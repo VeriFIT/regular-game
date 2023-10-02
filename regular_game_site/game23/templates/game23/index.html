@@ -35,149 +35,84 @@
     <h4 class="text-center">
       Umělá inteligence ŽblebtGPT 5.0 ovládla většinu světa. Jen Ty, tajný agent v záloze speciálně vycvičený pro boj s umělou inteligencí, můžeš lidstvo zachránit!
     </h4>
-            <p><strong><span style="color: red;">Místo Gargamela obrázek neco jako system shock's Shodan.</span></strong></p>
-    <img class="mx-auto d-block mb-3" src="http://static1.wikia.nocookie.net/__cb20130715165412/smurfsfanon/images/3/3b/Gargamel_(SA).gif" alt="Gargamel" width="300"/>
+    <img class="mx-auto d-block mb-3 mt-5" src="https://static.wikia.nocookie.net/shodan/images/0/09/SHODAN_1.jpg/revision/latest?cb=20120425063949" alt="Shodan" width="300"/>
 
-    <h1 class="text-center mb-3">Za koho chceš hrát?</h1>
+    <hr class="bg-secondary border-2 border-top border-secondary mt-5" />
+
+    <h1 class="text-center mb-3 mt-5">Jak hrát?</h1>
+    <p class="fs-5">Čeká tě několik různých misí. V každé misi budeš mít za úkol vymyslet textový řetězec, který bude splňovat všechny uvedené podmínky.
+    Textový řetězec je jakákoliv sekvence znaků, tedy ne nutně pouze alfanumerických. <b>Příklad řetězce:</b> <code>Abc_5 3f</code>.</p>
+
+    <p class="fs-5">Pokud Tvůj řetězec nebude splňovat některé z podmínek, hra dané podmínky označí, abys věděl, kde jsi udělal chybu.
+    <b>Avšak pozor:</b> v závislosti na zvolené obtížnosti můžeš být za každý chybný pokus bodově penalizován!</p>
+
+    <h1 class="text-center mb-3 mt-5">Za koho chceš hrát?</h1>
     <!-- Start game form -->
     <form autocomplete="off" action="{% url 'game23:start_game' %}" method="post">
-      <p><strong><span style="color: red;">nové (ferda mravenec, ...), U každého dát klady a zápory.</span></strong></p>
       {% csrf_token %}
       <!-- Avatar Selection -->
+      <!-- Doom Slayer, Hackerman -->
       <div class="row row-cols-1 row-cols-md-3 g-5">
-        <!-- Chuck Norris -->
-        <div class="col">
-          <div class="card shadow-sm h-100">
-            <img class="card-img-top" src="https://c.tenor.com/_jbZnDIerhwAAAAM/4th-of-july-independence-day.gif" alt="Čak"/>
-            <div class="card-body d-flex flex-column">
-              <input type="radio" class="btn-check" name="avatar" id="chuck" checked>
-              <label class="btn btn-outline-primary w-100 mt-auto" for="chuck">Čak Noris</label>
-            </div>
-          </div>
-        </div>
-        <!-- Macgyver -->
-        <div class="col">
-          <div class="card shadow-sm h-100">
-            <img class="card-img-top" src="https://c.tenor.com/JOX66MJe7DwAAAAM/mac-gyver-smiling.gif" alt="Mekgajvr"/>
-            <div class="card-body d-flex flex-column">
-              <input type="radio" class="btn-check" name="avatar" id="macgyver">
-              <label class="btn btn-outline-primary w-100 mt-auto" for="macgyver">Mekgajvr</label>
-            </div>
-          </div>
-        </div>
         <!-- Pikachu -->
         <div class="col">
           <div class="card shadow-sm h-100">
-            <img class="card-img-top" src="https://c.tenor.com/tZVpbfTIjNMAAAAM/pikachu.gif" alt="Pikaču"/>
-            <div class="card-body d-flex flex-column">
+            <img class="card-img-top" style="height: 13vw; object-fit: cover;" src="https://c.tenor.com/tZVpbfTIjNMAAAAM/pikachu.gif" alt="Pikaču"/>
+            <div class="card-body">
+              <h5 class="card-title">Zajímá mě jen příběh.</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Obtížnost: <span style="color: green">Jednoduchá</span></b></li>
+                <li class="list-group-item list-group-item-success">Méně podmínek v každé misi.</li>
+                <li class="list-group-item list-group-item-success">Možnost využít nápovědu.</li>
+                <li class="list-group-item list-group-item-success">Žádná penalizace za špatnou odpověď.</li>
+                <li class="list-group-item list-group-item-danger">Málo bodů za každý úspěšně vyřešený úkol.</li>
+              </ul>   
+            </div>
+            <div class="card-body d-flex flex-column">         
               <input type="radio" class="btn-check" name="avatar" id="pikachu">
               <label class="btn btn-outline-primary w-100 mt-auto" for="pikachu">Pikaču</label>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Smurfs -->
-      <div class="accordion mt-1" id="avatars-smurfs">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingSmurfs">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSmurfs" aria-expanded="false" aria-controls="collapseSmurfs">
-              Šmoulové
-            </button>
-          </h2>
-          <div id="collapseSmurfs" class="accordion-collapse collapse" aria-labelledby="headingSmurfs">
-            <div class="accordion-body">
-              <div class="row row-cols-1 row-cols-md-3 g-5">
-                <!-- Smurf 1 -->
-                <div class="col">
-                  <div class="card shadow-sm h-100">
-                    <img class="card-img-top" src="https://www.odpovedi.cz/img/question/9ecd381dde2899b1de0be6bbb264bd3c.png" alt="Koumak"/>
-                    <div class="card-body d-flex flex-column">
-                      <input type="radio" class="btn-check" name="avatar" id="koumak">
-                      <label class="btn btn-outline-primary w-100 mt-auto" for="koumak">Koumák</label>
-                    </div>
-                  </div>
-                </div>
-                <!-- Smurf 2 -->
-                <div class="col">
-                  <div class="card shadow-sm h-100">
-                    <img class="card-img-top" src="https://www.postavy.cz/foto/tatka-smoula-foto.jpg" alt="TatkaSmoula"/>
-                    <div class="card-body d-flex flex-column">
-                      <input type="radio" class="btn-check" name="avatar" id="smoula">
-                      <label class="btn btn-outline-primary w-100 mt-auto" for="smoula">Taťka Šmoula</label>
-                    </div>
-                  </div>
-                </div>
-                <!-- Smurf 3 -->
-                <div class="col">
-                  <div class="card shadow-sm h-100">
-                    <img class="card-img-top" src="https://1gr.cz/fotky/idnes/08/022/gal/EFL210454_smoulinka.jpg" alt="Smoulinka"/>
-                    <div class="card-body d-flex flex-column">
-                      <input type="radio" class="btn-check" name="avatar" id="smoulinka">
-                      <label class="btn btn-outline-primary w-100 mt-auto" for="smoulinka">Šmoulinka</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <!-- Doom Slayer -->
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img class="card-img-top" style="height: 13vw; object-fit: cover;" src="https://media.tenor.com/enYPjlc7Xk8AAAAd/doom.gif" alt="Slayer"/>
+            <div class="card-body">
+              <h5 class="card-title">Nebojím se výzvy.</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Obtížnost: <span style="color: orange">Normální</span></b></li>
+                <li class="list-group-item list-group-item-success">Standardní počet podmínek v každé misi.</li>
+                <li class="list-group-item list-group-item-success">Malá penalizace za špatnou odpověď.</li>
+                <li class="list-group-item list-group-item-danger">Žádná nápověda.</li>
+                <li class="list-group-item list-group-item-danger">Standardní počet bodů za každý úspěšně vyřešený úkol.</li>
+              </ul>   
+            </div>
+            <div class="card-body d-flex flex-column">
+              <input type="radio" class="btn-check" name="avatar" id="doom" checked>
+              <label class="btn btn-outline-primary w-100 mt-auto" for="doom">Doom Slayer</label>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Agents -->
-      <div class="accordion mt-1" id="avatars">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingAvatars">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAvatars" aria-expanded="false" aria-controls="collapseAvatars">
-              Další agenti
-            </button>
-          </h2>
-          <div id="collapseAvatars" class="accordion-collapse collapse" aria-labelledby="headingAvatars">
-            <div class="accordion-body">
-              <div class="row row-cols-1 row-cols-md-3 g-5">
-                <!-- Agent Smith -->
-                <div class="col">
-                  <div class="card shadow-sm h-100">
-                    <img class="card-img-top" src="https://i.pinimg.com/originals/13/6c/30/136c305a1fd5b8ea73bdac25b67bfd02.jpg" alt="Agent Smith"/>
-                    <div class="card-body d-flex flex-column">
-                      <input type="radio" class="btn-check" name="avatar" id="smith">
-                      <label class="btn btn-outline-primary w-100 mt-auto" for="smith">Agent Smith</label>
-                    </div>
-                  </div>
-                </div>
-                <!-- Agent 007 -->
-                <div class="col">
-                  <div class="card shadow-sm h-100">
-                    <img class="card-img-top" src="https://cpasvrai.com/wp-content/uploads/2016/10/agent-007.jpg" alt="Agent 007"/>
-                    <div class="card-body d-flex flex-column">
-                      <input type="radio" class="btn-check" name="avatar" id="007">
-                      <label class="btn btn-outline-primary w-100 mt-auto" for="007">Agent 007</label>
-                    </div>
-                  </div>
-                </div>
-                <!-- Černá vdova -->
-                <div class="col">
-                  <div class="card shadow-sm h-100">
-                    <img class="card-img-top" src="https://images.hindustantimes.com/img/2021/06/17/1600x900/black_widow_scarlett_johansson_avengers_1623941253944_1623941264776.jpg" alt="Černá vdova"/>
-                    <div class="card-body d-flex flex-column">
-                      <input type="radio" class="btn-check" name="avatar" id="bures">
-                      <label class="btn btn-outline-primary w-100 mt-auto" for="bures">Černá vdova</label>
-                    </div>
-                  </div>
-                </div>
-                <!-- Tomas Vojnar -->
-                <!-- <div class="col">
-                  <div class="card shadow-sm h-100">
-                    <img class="card-img-top" src="https://www.fit.vut.cz/person-photo/2491/?transparent=1" alt="Tomáš Vojnar"/>
-                    <div class="card-body d-flex flex-column">
-                      <input type="radio" class="btn-check" name="avatar" id="vojnar">
-                      <label class="btn btn-outline-primary w-100 mt-auto" for="vojnar">Tomáš Vojnar</label>
-                    </div>
-                  </div>
-                </div> -->
-              </div>
+        <!-- Hackerman -->
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img class="card-img-top" style="height: 13vw; object-fit: cover;" src="https://media0.giphy.com/media/3knKct3fGqxhK/giphy.gif?cid=ecf05e475kjqlsxiuun8n7jowzq8itwvgmlhkxg2zgo0abxp&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Hackerman"/>
+            <div class="card-body">
+              <h5 class="card-title">I was born for this.</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Obtížnost: <span style="color: red">Těžká</span></b></li>
+                <li class="list-group-item list-group-item-success">Hodně bodů za každý úspěšně vyřešený úkol.</li>
+                <li class="list-group-item list-group-item-danger">Dodatečná podmínka v každé misi.</li>
+                <li class="list-group-item list-group-item-danger">Žádná nápověda.</li>
+                <li class="list-group-item list-group-item-danger">Větší penalizace za špatnou odpověď.</li>
+              </ul>   
+            </div>
+            <div class="card-body d-flex flex-column">
+              <input type="radio" class="btn-check" name="avatar" id="hackerman">
+              <label class="btn btn-outline-primary w-100 mt-auto" for="hackerman">Hackerman</label>
             </div>
           </div>
-        </div>
+        </div>        
       </div>
 
       <!-- Name form -->
@@ -201,33 +136,8 @@
       {% endif %}
     </form>
 
-    <!-- Help accordions -->
+    <!--
     <div class="accordion mt-5" id="navod">
-      <!-- How to play -->
-      <div class="accordion-item border-primary">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            Jak hrát?
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
-          <div class="accordion-body">
-            <p><strong><span style="color: red;">OLD OLD OLD OLD OLD OLD OLD.</span></strong></p>
-            <p><strong>Princip hry.</strong> Po vybrání avatara a zadání svého jména Tě bude čekat několik úkolů.
-            V každém úkolu budou zadány dvě množiny textových řetězců: <span class="text-success">množina platných řetězců</span> a <span class="text-danger">množina neplatných řetězců</span>.
-            Tvým úkolem je nalézt tzv. <strong>regex</strong> (<strong>reg</strong>ular <strong>ex</strong>pression, česky <em>regulární výraz</em>),
-            který zachytí všechny platné řetězce a propustí všechny neplatné řetězce.</p>
-
-
-            <p>Cílem je vymyslet pro každý úkol co nejkratší možný regex: čím kratší regex vymyslíš, tím lepší skóre za daný úkol obdržíš.
-            V tomto případě platí, že <u>čím nižší skóre, tím lepší výsledek</u> a umístění v žebříčku řešitelů.
-            Pokud si nebudeš vědět rady s konkrétním úkolem, požádej o pomoc někoho z organizátorů nebo daný úkol přeskoč (za což ale obdržíš 30 trestných bodů).</p>
-
-            <p>Pokud Tě po této hře regexy zaujmou a budeš mít chuť na další hlavolamy, můžeš vyzkoušet <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer"><strong>regexové křížovky</strong></a>.</p>
-          </div>
-        </div>
-      </div>
-      <!-- Regex intro -->
       <div class="accordion-item border-primary">
         <h2 class="accordion-header" id="headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -242,40 +152,44 @@
         </div>
       </div>
     </div>
+    -->
   </div>
   {% endif %}
 </div>
 
 
 <!-- Leaderboard -->
-<div class="container-fluid bg-grey flex-fill">
-  <h2>Žebříček</h2>
-  {% if highscore_list %}
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Hráč</th>
-        <th>Začátek hry</th>
-        <th>Délka hry</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for player in highscore_list %}
-      <tr>
-          <td>{{ forloop.counter }}</td>
-          <td>{{ player.name }}</td>
-          <td>{{ player.time_begin_str }}</td>
-          <td>{{ player.duration_str }}</td>
-          <td>{{ player.score }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% else %}
-      <p>Žádný hráč zatím hru nedokončil.</p>
-  {% endif %}
+<div class="container">
+  <hr class="bg-secondary border-2 border-top border-secondary mt-5" />
+  <h1 class="text-center mt-5">Žebříček hráčů</h2>
+  <div class="bg-grey flex-fill">
+    {% if highscore_list %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Hráč</th>
+          <th>Začátek hry</th>
+          <th>Délka hry</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for player in highscore_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ player.name }}</td>
+            <td>{{ player.time_begin_str }}</td>
+            <td>{{ player.duration_str }}</td>
+            <td>{{ player.score }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+        <p>Žádný hráč zatím hru nedokončil.</p>
+    {% endif %}
+  </div>
 </div>
 
 {% endblock %}
