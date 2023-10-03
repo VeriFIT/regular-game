@@ -5,29 +5,52 @@
 <!-- Game finished alert -->
 <div class="container-fluid p-5">
   {% if player %}
-    {% if player.score < 105 %}
-      <div class="alert alert-success text-center">
-            <p><strong><span style="color: red;">OLD OLD OLD OLD OLD OLD OLD.</span></strong></p>
-        <strong>Gratulujeme, podařilo se Ti Gargamela porazit!</strong> Získané body: <strong>{{ player.score }}</strong>.<br>
-        <strong>Kam dál?</strong> Vyzkoušej další zábavné <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer">regexové hlavolamy</a>.
-        <img class="mx-auto d-block mb-3" src="https://clipground.com/images/trophy-clipart-19.jpg" alt="Gargamel" width="300"/>
-        <form action="{% url 'game23:index' %}" method="get">
-          {% csrf_token %}
-          <button type="submit" class="mt-3 btn btn-primary">Zpět na úvodní stránku</button>
-        </form>
+  <div class="container">
+    <div class="row">
+      <!-- Left column with the task, conditions and reply form -->
+      <div class="col-sm">
+      {% if player.score >= 150 %}
+        <div class="alert alert-success text-center">
+          <strong>Gratulujeme, podařilo se Ti zabránit nadvládě umělé inteligence a zániku celého lidstva!</strong><br>
+          <strong>Kam dál?</strong> Vyzkoušej další zábavné <a href="https://neal.fun/password-game/" alt="Hesla" target="_blank" rel="noopener noreferrer">hlavolamy s podmínkami</a> nebo <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer">regexové hlavolamy</a>.
+          <img class="rounded-3 mx-auto d-block my-4 border-success" src="https://miro.medium.com/v2/resize:fit:768/1*smXziyrd2Iv6t5fhXf3jpw.jpeg" alt="Vitezstvi" width="640px"/>
+          <form action="{% url 'game23:index' %}" method="get">
+            {% csrf_token %}
+            <button type="submit" class="mt-3 btn btn-primary">Zpět na úvodní stránku</button>
+          </form>
+        </div>
+      {% else %}
+        <div class="alert alert-danger text-center">
+          <strong>Umělá inteligence zvítězila a ovládla celý svět.</strong><br>
+          <strong>Kam dál?</strong> Vyzkoušej další zábavné <a href="https://neal.fun/password-game/" alt="Hesla" target="_blank" rel="noopener noreferrer">hlavolamy s podmínkami</a> nebo <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer">regexové hlavolamy</a>.
+          <img class="rounded-3 mx-auto d-block my-4 border-danger" src="https://images.theconversation.com/files/32998/original/64hch4w4-1381733118.jpg" alt="Prohra" width="640"/>
+          <form action="{% url 'game23:index' %}" method="get">
+            {% csrf_token %}
+            <button type="submit" class="mt-3 btn btn-primary">Zpět na úvodní stránku</button>
+          </form>
+        </div>
+      {% endif %}
       </div>
-    {% else %}
-      <div class="alert alert-danger text-center">
-            <p><strong><span style="color: red;">OLD OLD OLD OLD OLD OLD OLD.</span></strong></p>
-        <strong>Gargamel zvítězil a ovládl svět.</strong> Získané body: <strong>{{ player.score }}</strong>.<br>
-        <strong>Kam dál?</strong> Vyzkoušej další zábavné <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer">regexové hlavolamy</a>.
-        <img class="mx-auto d-block mb-3" src="http://static1.wikia.nocookie.net/__cb20130715165412/smurfsfanon/images/3/3b/Gargamel_(SA).gif" alt="Gargamel" width="300"/>
-        <form action="{% url 'game23:index' %}" method="get">
-          {% csrf_token %}
-          <button type="submit" class="mt-3 btn btn-primary">Zpět na úvodní stránku</button>
-        </form>
+      <!-- Right column with player stats -->
+      <div class="col-sm-auto">
+
+        <!-- Player -->
+        <div class="card">
+          <img class="card-img-top" src="{{ player.difficulty.avatar_url }}" alt="{{ player.difficulty.avatar }}" style="height: 9.2vw; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Agent {{ player.name }}</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i>Krycí jméno: </i>{{ player.difficulty.avatar }}</li>
+              <li class="list-group-item"><i>Obtížnost: </i>
+                <span style="color: {% if player.difficulty.name == 'Těžká' %}red{% elif player.difficulty.name == 'Normální' %}orange{% else %}green{% endif %}">{{ player.difficulty.name }}</span>
+              </li>
+              <li class="list-group-item"><i>Score: </i>{{ player.score }}</li>
+            </ul>
+          </div>
+        </div>
       </div>
-    {% endif %}
+    </div>
+  </div>
   {% else %}
 
   <div class="container">
