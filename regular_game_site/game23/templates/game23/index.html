@@ -33,18 +33,29 @@
   <div class="container">
     <!-- Intro -->
     <h4 class="text-center">
-      Umělá inteligence ŽblebtGPT 5.0 ovládla většinu světa. Jen Ty, tajný agent v záloze speciálně vycvičený pro boj s umělou inteligencí, můžeš lidstvo zachránit!
+      Umělá inteligence ŽblebtGPT 5.0 ovládla většinu světa. Jen Ty, tajný agent v záloze speciálně
+      vycvičený pro boj s umělou inteligencí, můžeš lidstvo zachránit!
     </h4>
     <img class="mx-auto d-block mb-3 mt-5" src="https://static.wikia.nocookie.net/shodan/images/0/09/SHODAN_1.jpg/revision/latest?cb=20120425063949" alt="Shodan" width="300"/>
 
     <hr class="bg-secondary border-2 border-top border-secondary mt-5" />
 
     <h1 class="text-center mb-3 mt-5">Jak hrát?</h1>
-    <p class="fs-5">Čeká tě několik různých misí. V každé misi budeš mít za úkol vymyslet textový řetězec, který bude splňovat všechny uvedené podmínky.
-    Textový řetězec je jakákoliv sekvence znaků, tedy ne nutně pouze alfanumerických. <b>Příklad řetězce:</b> <code>Abc_5 3f</code>.</p>
+    <p class="fs-5">Čeká tě několik různých misí. V každé misi budeš mít za úkol vymyslet textový
+    řetězec, který bude splňovat všechny uvedené podmínky. Textový řetězec je jakákoliv sekvence
+    znaků, tedy ne nutně pouze alfanumerických. <b>Příklad řetězce:</b> <code>Abc_5 3f</code>.</p>
 
-    <p class="fs-5">Pokud Tvůj řetězec nebude splňovat některé z podmínek, hra dané podmínky označí, abys věděl, kde jsi udělal chybu.
-    <b>Avšak pozor:</b> v závislosti na zvolené obtížnosti můžeš být za každý chybný pokus bodově penalizován!</p>
+    <p class="fs-5">Za každou úspěšně vyřešenou misi obdržíš body. Množství obdržených bodů může být
+    dále ovlivněno délkou Tebou zadaného řetězce, přičemž platí, že <b>čím kratší řetězec, tím více
+    bodů</b> za misi obdržíš!</p>
+
+    <p class="fs-5">Pokud Tvůj řetězec nebude splňovat některé z podmínek, hra dané podmínky označí,
+    abys věděl, kde jsi udělal chybu. <b>Avšak pozor:</b> v závislosti na zvolené obtížnosti můžeš
+    být za každý chybný pokus bodově penalizován!</p>
+
+    <p class="fs-5">Pokud si s nějakou misí nevíš rady, můžeš ji buď přeskočit, nebo se zeptat
+    organizátorů o radu. Podobně jako v případě neúspěšného pokusu o vyřešení <b>však můžeš být
+    penalizován</b> (opět v závislosti na zvolené obtížnosti).</p>
 
     <h1 class="text-center mb-3 mt-5">Za koho chceš hrát?</h1>
     <!-- Start game form -->
@@ -58,17 +69,17 @@
           <div class="card shadow-sm h-100">
             <img class="card-img-top" style="height: 13vw; object-fit: cover;" src="https://c.tenor.com/tZVpbfTIjNMAAAAM/pikachu.gif" alt="Pikaču"/>
             <div class="card-body">
-              <h5 class="card-title">Zajímá mě jen příběh.</h5>
+              <h4 class="card-title">Zajímá mě jen příběh.</h4>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>Obtížnost: <span style="color: green">Jednoduchá</span></b></li>
                 <li class="list-group-item list-group-item-success">Méně podmínek v každé misi.</li>
-                <li class="list-group-item list-group-item-success">Možnost využít nápovědu.</li>
+                <li class="list-group-item list-group-item-success">Žádná penalizace za přeskočení úlohy.</li>
                 <li class="list-group-item list-group-item-success">Žádná penalizace za špatnou odpověď.</li>
                 <li class="list-group-item list-group-item-danger">Málo bodů za každý úspěšně vyřešený úkol.</li>
               </ul>   
             </div>
             <div class="card-body d-flex flex-column">         
-              <input type="radio" class="btn-check" name="avatar" id="pikachu">
+              <input type="radio" class="btn-check" name="avatar" id="pikachu" value="Pikaču">
               <label class="btn btn-outline-primary w-100 mt-auto" for="pikachu">Pikaču</label>
             </div>
           </div>
@@ -78,17 +89,17 @@
           <div class="card shadow-sm h-100">
             <img class="card-img-top" style="height: 13vw; object-fit: cover;" src="https://media.tenor.com/enYPjlc7Xk8AAAAd/doom.gif" alt="Slayer"/>
             <div class="card-body">
-              <h5 class="card-title">Nebojím se výzvy.</h5>
+              <h4 class="card-title">Nebojím se výzvy.</h4>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>Obtížnost: <span style="color: orange">Normální</span></b></li>
                 <li class="list-group-item list-group-item-success">Standardní počet podmínek v každé misi.</li>
-                <li class="list-group-item list-group-item-success">Malá penalizace za špatnou odpověď.</li>
-                <li class="list-group-item list-group-item-danger">Žádná nápověda.</li>
-                <li class="list-group-item list-group-item-danger">Standardní počet bodů za každý úspěšně vyřešený úkol.</li>
+                <li class="list-group-item list-group-item-success">Standardní počet bodů za každý úspěšně vyřešený úkol.</li>
+                <li class="list-group-item list-group-item-danger">Malá penalizace za špatnou odpověď.</li>
+                <li class="list-group-item list-group-item-danger">Malá penalizace za přeskočení úlohy.</li>
               </ul>   
             </div>
             <div class="card-body d-flex flex-column">
-              <input type="radio" class="btn-check" name="avatar" id="doom" checked>
+              <input type="radio" class="btn-check" name="avatar" id="doom" value="Doom Slayer" checked>
               <label class="btn btn-outline-primary w-100 mt-auto" for="doom">Doom Slayer</label>
             </div>
           </div>
@@ -96,19 +107,19 @@
         <!-- Hackerman -->
         <div class="col">
           <div class="card shadow-sm h-100">
-            <img class="card-img-top" style="height: 13vw; object-fit: cover;" src="https://media0.giphy.com/media/3knKct3fGqxhK/giphy.gif?cid=ecf05e475kjqlsxiuun8n7jowzq8itwvgmlhkxg2zgo0abxp&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Hackerman"/>
+            <img class="card-img-top" style="height: 13vw; object-fit: cover;" src="https://media0.giphy.com/media/3knKct3fGqxhK/giphy.gif" alt="Hackerman"/>
             <div class="card-body">
-              <h5 class="card-title">I was born for this.</h5>
+              <h4 class="card-title">I was born for this.</h4>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>Obtížnost: <span style="color: red">Těžká</span></b></li>
                 <li class="list-group-item list-group-item-success">Hodně bodů za každý úspěšně vyřešený úkol.</li>
                 <li class="list-group-item list-group-item-danger">Dodatečná podmínka v každé misi.</li>
-                <li class="list-group-item list-group-item-danger">Žádná nápověda.</li>
                 <li class="list-group-item list-group-item-danger">Větší penalizace za špatnou odpověď.</li>
+                <li class="list-group-item list-group-item-danger">Větší penalizace za přeskočení úlohy.</li>
               </ul>   
             </div>
             <div class="card-body d-flex flex-column">
-              <input type="radio" class="btn-check" name="avatar" id="hackerman">
+              <input type="radio" class="btn-check" name="avatar" id="hackerman" value="Hackerman">
               <label class="btn btn-outline-primary w-100 mt-auto" for="hackerman">Hackerman</label>
             </div>
           </div>
@@ -161,7 +172,7 @@
 <!-- Leaderboard -->
 <div class="container">
   <hr class="bg-secondary border-2 border-top border-secondary mt-5" />
-  <h1 class="text-center mt-5">Žebříček hráčů</h2>
+  <h1 class="text-center mt-5">Žebříček nejlepších hráčů</h2>
   <div class="bg-grey flex-fill">
     {% if highscore_list %}
     <table class="table table-striped">
@@ -171,6 +182,8 @@
           <th>Hráč</th>
           <th>Začátek hry</th>
           <th>Délka hry</th>
+          <th>Avatar</th>
+          <th>Obtížnost</th>
           <th>Score</th>
         </tr>
       </thead>
@@ -181,6 +194,8 @@
             <td>{{ player.name }}</td>
             <td>{{ player.time_begin_str }}</td>
             <td>{{ player.duration_str }}</td>
+            <td>{{ player.difficulty.avatar }}</td>
+            <td>{{ player.difficulty.name }}</td>
             <td>{{ player.score }}</td>
         </tr>
         {% endfor %}

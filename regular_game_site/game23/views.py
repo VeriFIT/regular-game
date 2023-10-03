@@ -17,11 +17,6 @@ def get_tasks_cnt():
         return task_with_highest_num.num
     return 0
 
-# penalty for skipping a task
-SKIP_PENALTY = 30
-# penalty for a wrong answer
-WRONG_PENALTY = 2
-
 
 # Main page with high score chart
 class IndexView(generic.ListView):
@@ -30,8 +25,13 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return at most 10 players with the highest scores."""
-        highscore = Player.objects.filter(finished=True).order_by('score')[:10]
-        highscore = sorted(highscore, key = lambda x: (x.score, x.duration))
+        highscore = Player.objects.filter(finished=True).order_by('-score')[:10]
+        # We need to sort by descending duration and ascending score
+        highscore = sorted(
+            sorted(highscore, key = lambda x: x.duration),
+            key=lambda x: x.score,
+            reverse=True
+        )
         return highscore
 
 
@@ -44,9 +44,11 @@ def start_game(request):
         })
 
     plname = request.POST['plname']
+    avatar = request.POST['avatar']
 
     player = Player()
     player.name = plname
+    player.difficulty = Difficulty.objects.get(avatar=avatar)
     # Quick timezone hack
     player.time_begin = datetime.now() + timedelta(hours=2)
     player.score = 0
@@ -57,17 +59,16 @@ def start_game(request):
 
 
 # common rendering of the task page
-def render_next_task_with(request, player, result=None, error_msg=None, bad_cond=None):
+def render_next_task_with(request, player, result=None, error_msg=None, cond=None):
     task = get_object_or_404(Task, num=player.next_task)
+    diff_conds = {t: None for t in task.condition_set.filter(difficulty__lte=player.difficulty)}
     return render(request, 'game23/task.html',
                   {
                       'player': player,
                       'task': task,
                       'result': result,
                       'result_len': len(result) if result else 0,
-                      # 'pos_snips': pos_snips,
-                      # 'neg_snips': neg_snips,
-                      'bad_cond': bad_cond,
+                      'conditions': cond if cond is not None else diff_conds,
                       'tasks_cnt': get_tasks_cnt(),
                       'tasks_done': task.num - 1,
                       'progress': 100 / get_tasks_cnt() * (task.num - 1),
@@ -94,12 +95,12 @@ def task(request, player_id):
 def answer(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
     if 'skip' in request.POST:
-        player.score += SKIP_PENALTY
+        player.score += player.difficulty.task_skip_score
         player.next_task += 1
         player.save()
         return HttpResponseRedirect(reverse('game23:task', args=(player.pk,)))
     elif 'giveup' in request.POST:
-        player.score += (get_tasks_cnt() - player.next_task + 1) * SKIP_PENALTY
+        player.score += (get_tasks_cnt() - player.next_task + 1) * player.difficulty.task_skip_score
         player.next_task = get_tasks_cnt() + 1
         player.save()
         return HttpResponseRedirect(reverse('game23:task', args=(player.pk,)))
@@ -112,24 +113,33 @@ def answer(request, player_id):
     result = request.POST['result']
     correct = True
 
-    conditions = task.condition_set.all()
-    bad_cond = []
+    conditions = {t: None for t in task.condition_set.filter(difficulty__lte=player.difficulty)}
 
     try:
-        for cond in conditions:   # we need to match all examples
+        for cond in conditions.keys():   # we need to match all examples
             if not cond_satisfied(cond, result):
                 correct = correct and False
-                bad_cond += [cond]
+                conditions[cond] = False
+            else:
+                conditions[cond] = True
     except Exception as error:
-        return render_next_task_with(request, player, regex=regex, error_msg=f"Špatně zadaná odpověď či jiná chyba! (popis chyby: \"{error}\")")
+        return render_next_task_with(
+            request,
+            player,
+            result=result,
+            error_msg=f"Špatně zadaná odpověď či jiná chyba! (popis chyby: \"{error}\")",
+            cond=conditions
+        )
 
     if not correct:
-        player.score += WRONG_PENALTY
+        player.score += player.difficulty.task_fail_score
         player.save()
-        return render_next_task_with(request, player, result, error_msg=f"Špatná odpověď \"{result}\"!", bad_cond=bad_cond)
+        return render_next_task_with(
+            request, player, result, error_msg=f"Špatná odpověď \"{result}\"!", cond=conditions
+        )
 
     player.next_task += 1
-    player.score += len(result)
+    player.score += player.difficulty.task_ok_score
 
     if not task.best_solution or len(result) < len(task.best_solution):
         task.best_solution = result

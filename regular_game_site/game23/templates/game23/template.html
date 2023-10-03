@@ -25,16 +25,31 @@
         background-color: #2f2f2f;
         color: #fff;
       }
+      .bg-cond-success {
+        background-color: #e3ffe3;
+        border-radius: 4px;
+      }
+      .bg-cond-header-success {
+        background-color: #aef3ae;
+      }
+
+      .bg-cond-fail {
+        background-color: #ffecec;
+        border-radius: 4px;
+      }
+      .bg-cond-header-fail {
+        background-color: #ffc7c7;
+      }
     </style>
 
     <script type="text/javascript">
-      function countChars(regex,displaylabel) {
-        var len = document.getElementById(regex).value.length;
+      function countChars(input,displaylabel) {
+        var len = document.getElementById(input).value.length;
         document.getElementById(displaylabel).innerHTML = len;
       }
     </script>
   </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100" onload="countChars('result', 'displayto')">
 
 <!-- Header -->
 <div class="p-4 bg-1 text-center text-white">

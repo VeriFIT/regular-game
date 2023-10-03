@@ -3,204 +3,108 @@
 {% block content %}
 
 
-<!-- Task description -->
-<div class="container-fluid px-4 py-2">
-  <h2>{{ task.num }}: {{ task.title }}</h2>
-  <div class="alert alert-info">
-    {{ task.text|safe }}
-  </div>
-</div>
-
-
-<div class="container-fluid px-4 py-0 bg-grey">
-  <!-- Score + Best solution -->
+<div class="container mt-4" style="max-width: 90%">
+  <h2>Mise {{ task.num }}/{{ tasks_cnt }}: {{ task.title }}</h2>
   <div class="row">
-    <div class="col">
-      <h3>Score: {{ player.score }} </h3>
-    </div>
-    <div class="col text-end">
-      {% if best_sol_len %}
-      <!-- <h3>Autor nejlepšího řešení: {{ best_sol_player.name }}</h3> -->
-      <h3>Délka nejlepšího řešení: {{ best_sol_len }} (hráč "{{ best_sol_player.name }}")</h3>
-      {% endif %}
-    </div>
-  </div>
-  <!-- Progress bar -->
-  <div class="progress" style="height: 20px">
-    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-label="Task progress" 
-    style="width: {{ progress }}%" aria-valuenow="{{ task.num }}" aria-valuemin="0" aria-valuemax="6">
-      <strong style="font-size: 15px">{{ tasks_done }} / {{ tasks_cnt }}</strong>
-    </div>
-  </div>
-</div>
+    <!-- Left column with the task, conditions and reply form -->
+    <div class="col-sm">
 
-
-<!-- Long Strings -->
-{% if task.num == 11 %}
-<div class="container-fluid p-4 bg-grey">
-  <!-- Valid strings -->
-  <div class="row align-items-md-stretch">
-    <div class="col-md-12">
-      <div class="card text-white bg-success mb-3 h-100">
-        <div class="card-header">Potřeba zachytit</div>
-        <div class="card-body">
-<pre class="card-text">
-{% for snippet in pos_snips %}
-{{ snippet.text }}
-{% endfor %}
-</pre>
-        </div>
+      <!-- Task description -->
+      <div class="alert alert-info">
+        {{ task.text|safe }}
       </div>
-    </div>
-  </div>
-  <!-- Invalid strings -->
-  <div class="row align-items-md-stretch mt-3">
-    <div class="col-md-12">
-      <div class="card text-white bg-danger mb-3 h-100">
-        <div class="card-header">Musí projít</div>
-        <div class="card-body">
-<pre>
-{% for snippet in neg_snips %}
-{{ snippet.text }}
-{% endfor %}
-</pre>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endif %}
 
-<!-- Short Strings -->
-{% if task.num != 11 %}
-<div class="container-fluid p-4 bg-grey">
-  <div class="row align-items-md-stretch">
-    <div class="col-md-6">
-      <div class="card text-white bg-success mb-3 h-100">
-        <div class="card-header">Potřeba zachytit</div>
-        <div class="card-body">
-<pre class="card-text">
-{% for snippet in pos_snips %}
-{{ snippet.text }}
-{% endfor %}
-</pre>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card text-white bg-danger mb-3 h-100">
-        <div class="card-header">Musí projít</div>
-        <div class="card-body">
-<pre>
-{% for snippet in neg_snips %}
-{{ snippet.text }}
-{% endfor %}
-</pre>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endif %}
-
-<!-- Submit Form -->
-<form autocomplete="off" action="{% url 'game23:answer' player.id %}" method="post">
-  {% csrf_token %}
-  <div class="row bg-grey py-2">
-    <div class="col-sm-3"></div>
-    <label class="col-sm-1 col-form-label" for="result"><strong>Odpověď:</strong></label>
-    <div class="col-sm-4">
-      {% if result %}
-        <input type="text" class="form-control" id="result" name="result" value="{{ result }}" oninput="countChars('result', 'displayto')">
-      {% else %}
-        <input type="text" class="form-control" id="result" name="result" placeholder="Zadejte odpověď" oninput="countChars('result', 'displayto')">
-      {% endif %}
-    </div>
-    <div class="col-sm-4">
-      <button type="submit" name="submit" class="mx-1 btn btn-success">Odpovědět</button>
-      <button type="submit" name="skip" class="mx-1 btn btn-warning">Přeskočit</button>
-      <button type="submit" name="giveup" class="mx-1 btn btn-danger">Ukončit</button>
-    </div>
-  </div>
-  <div class="row mb-3 bg-grey py-2">
-    <div class="col-sm-3"></div>
-    <span class="col-sm-1"><strong>Počet znaků:</strong></span>
-    <div class="col-sm-4 mb-3">
-      <span id="displayto">{{ regex_len }}</span>
-    </div>
-    <div class="col-sm-4"></div>
-  </div>
-  {% if error_message %}
-  <div class="row">
-    <div class="col-sm-3"></div>
-    <div class="alert alert-danger col-sm-6">
-      <strong>Chyba!</strong> {{ error_message }}
-    </div>
-  </div>
-  {% endif %}
-</form>
-
-
-<!-- Invalid short matches reporting -->
-{% if task.num != 11 %}
-  <div class="container-fluid p-4">
-    <div class="row align-items-md-stretch">
-      {% if bad_cond %}
-      <div class="col-md-6">
-        <div class="card border-danger mb-3">
-          <div class="card-header">Nepodařilo se Ti splnit tyto podmínky:</div>
-          <div class="card-body text-danger">
-<pre class="card-text">
-{% for cond in bad_cond %}
-{{ cond.text }}
-{% endfor %}
-</pre>
+      <!-- Condition cards -->
+      <div class="row row-cols-2 gx-3 gy-3">
+        {% for cond, satisfied in conditions.items %}
+        <div class="col">
+          {% if satisfied is None %}
+          <div class="card h-100">
+            <div class="card-header">Podmínka {{ forloop.counter }}</div>
+            <div class="card-body">
+              <p class="card-text">{{ cond.text }}</p>
+            </div>
           </div>
+          {% elif satisfied %}
+          <div class="card h-100 border-success">
+            <div class="card-header bg-cond-header-success">
+              <img src="https://neal.fun/password-game/checkmark.svg" style="height: 19px; width: 19px;">
+              <span>Podmínka {{ forloop.counter }}</span>
+            </div>
+            <div class="card-body bg-cond-success">
+              <p class="card-text">{{ cond.text }}</p>
+            </div>
+          </div>
+          {% else %}
+          <div class="card h-100 border-danger">
+            <div class="card-header bg-cond-header-fail">
+              <img src="https://neal.fun/password-game/error.svg" style="height: 19px; width: 19px;">
+              <span>Podmínka {{ forloop.counter }}</span>
+            </div>
+            <div class="card-body bg-cond-fail">
+              <p class="card-text">{{ cond.text }}</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Submit Form -->
+      <div class="container">
+        <form autocomplete="off" action="{% url 'game23:answer' player.id %}" method="post">
+          {% csrf_token %}
+          <div class="row mt-4">
+            <div class="col-sm-3"></div>
+            <label class="col-sm-1 col-form-label" for="result"><strong>Odpověď:</strong></label>
+            <div class="col-sm-4">
+              {% if result %}
+                <input type="text" class="form-control" id="result" name="result" value="{{ result }}" oninput="countChars('result', 'displayto')">
+              {% else %}
+                <input type="text" class="form-control" id="result" name="result" placeholder="Zadejte odpověď" oninput="countChars('result', 'displayto')">
+              {% endif %}
+            </div>
+            <div class="col-sm-1 col-form-label"><span id="displayto">{{ result_len }}</span></div>
+          </div>
+          <div class="row mt-2 mb-3">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+              <button type="submit" name="submit" class="me-2 btn btn-success">Odpovědět</button>
+              <button type="submit" name="skip" class="mx-2 btn btn-warning">Přeskočit</button>
+              <button type="submit" name="giveup" class="mx-2 btn btn-danger">Ukončit</button>
+            </div>
+          </div>
+          {% if error_message %}
+          <div class="row mb-3">
+            <div class="col-sm-3"></div>
+            <div class="alert alert-danger col-sm-6">
+              <strong>Chyba!</strong> {{ error_message }}
+            </div>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Right column with player stats -->
+    <div class="col-sm-auto">
+
+      <!-- Player -->
+      <div class="card">
+        <img class="card-img-top" src="{{ player.difficulty.avatar_url }}" alt="{{ player.difficulty.avatar }}" style="height: 9.2vw; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">Agent {{ player.name }}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i>Krycí jméno: </i>{{ player.difficulty.avatar }}</li>
+            <li class="list-group-item"><i>Obtížnost: </i>
+              <span style="color: {% if player.difficulty.name == 'Těžká' %}red{% elif player.difficulty.name == 'Normální' %}orange{% else %}green{% endif %}">{{ player.difficulty.name }}</span>
+            </li>
+            <li class="list-group-item"><i>Score: </i>{{ player.score }}</li>
+          </ul>
         </div>
       </div>
-      {% endif %}
-    </div>
-  </div>
-{% endif %}
 
-<!-- Invalid long matches reporting -->
-{% if task.num == 11 %}
-<div class="container-fluid p-4">
-  <!-- Valid strings -->
-  {% if bad_cond %}
-  <div class="row align-items-md-stretch">
-    <div class="col-md-12">
-      <div class="card border-danger mb-3">
-        <div class="card-header">Nepodařilo se Ti splnit tyto podmínky:</div>
-        <div class="card-body text-danger">
-<pre class="card-text">
-{% for cond in bad_cond %}
-{{ cond.text }}
-{% endfor %}
-</pre>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-</div>
-{% endif %}
-
-<div class="container p-4">
-  <!-- Help accordion -->
-  <div class="accordion" id="navod">
-    <!-- Regex intro -->
-    <div class="accordion-item border-primary">
-      <h2 class="accordion-header" id="helpOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHelp" aria-expanded="true" aria-controls="collapseHelp">
-          Nápověda k regexům
-        </button>
-      </h2>
-      <div id="collapseHelp" class="accordion-collapse collapse show" aria-labelledby="helpOne">
-        {% comment %}
-        {% include "./regex-help.html" %}
-        {% endcomment %}
-      </div>
     </div>
   </div>
 </div>

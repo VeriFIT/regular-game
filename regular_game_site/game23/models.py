@@ -1,9 +1,49 @@
 from django.db import models
 
 
+class Difficulty(models.Model):
+    name = models.CharField(max_length=15)
+    order = models.IntegerField()
+    avatar = models.CharField(max_length=20, unique=True)
+    avatar_url = models.URLField()
+    task_ok_score = models.IntegerField()
+    task_fail_score = models.IntegerField()
+    task_skip_score = models.IntegerField()
+
+    @classmethod
+    def get_default_pk(cls):
+        diff, _ = cls.objects.get_or_create(
+            name="-",
+            order=-1,
+            avatar="-",
+            avatar_url="https://c.tenor.com/tZVpbfTIjNMAAAAM/pikachu.gif",
+            task_ok_score=0,
+            task_fail_score=0,
+            task_skip_score=0,
+        )
+        return diff.pk
+
+    def __str__(self):
+        return f"{self.name}"
+    
+    # def __eq__(self, other):
+    #     if not isinstance(other, Difficulty):
+    #         return NotImplemented
+    #     return self.order == other.order
+    
+    def __lte__(self, other):
+        if not isinstance(other, Difficulty):
+            return NotImplemented
+        return self.order <= other.order
+
+
+
 # A player for a game
 class Player(models.Model):
     name = models.CharField(max_length=200)
+    difficulty = models.ForeignKey(
+        Difficulty, default=Difficulty.get_default_pk, on_delete=models.SET_DEFAULT
+    )
     time_begin = models.DateTimeField('time of game start')
     time_end =  models.DateTimeField('time of game end', null=True)
     score = models.IntegerField()
@@ -52,6 +92,9 @@ class Condition(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     text = models.TextField()
     smt = models.TextField()
+    difficulty = models.ForeignKey(
+        Difficulty, default=Difficulty.get_default_pk, on_delete=models.SET_DEFAULT
+    )
 
     def __str__(self):
         return f'{self.text}'
