@@ -22,7 +22,7 @@
           <div class="card h-100">
             <div class="card-header">Podmínka {{ forloop.counter }}</div>
             <div class="card-body">
-              <p class="card-text">{{ cond.text }}</p>
+              <p class="card-text">{{ cond.text|safe }}</p>
             </div>
           </div>
           {% elif satisfied %}
@@ -32,7 +32,7 @@
               <span>Podmínka {{ forloop.counter }}</span>
             </div>
             <div class="card-body bg-cond-success">
-              <p class="card-text">{{ cond.text }}</p>
+              <p class="card-text">{{ cond.text|safe }}</p>
             </div>
           </div>
           {% else %}
@@ -42,7 +42,7 @@
               <span>Podmínka {{ forloop.counter }}</span>
             </div>
             <div class="card-body bg-cond-fail">
-              <p class="card-text">{{ cond.text }}</p>
+              <p class="card-text">{{ cond.text|safe }}</p>
             </div>
           </div>
           {% endif %}

@@ -61,7 +61,7 @@ def start_game(request):
 # common rendering of the task page
 def render_next_task_with(request, player, result=None, error_msg=None, cond=None):
     task = get_object_or_404(Task, num=player.next_task)
-    diff_conds = {t: None for t in task.condition_set.filter(difficulty__lte=player.difficulty)}
+    diff_conds = {t: None for t in task.condition_set.filter(difficulty=player.difficulty)}
     return render(request, 'game23/task.html',
                   {
                       'player': player,
@@ -113,7 +113,7 @@ def answer(request, player_id):
     result = request.POST['result']
     correct = True
 
-    conditions = {t: None for t in task.condition_set.filter(difficulty__lte=player.difficulty)}
+    conditions = {t: None for t in task.condition_set.filter(difficulty=player.difficulty)}
 
     try:
         for cond in conditions.keys():   # we need to match all examples
