@@ -64,7 +64,6 @@ hard = Difficulty(
 save_difficulty(easy)
 save_difficulty(medium)
 save_difficulty(hard)
-    
 
 
 # clean
@@ -101,6 +100,38 @@ create_task(
         (easy.order, "Prostřední číslice byla největší.", "(assert (forall ((i Int)) (or (= i 4) (< (str.to_code (str.at result i)) (str.to_code (str.at result 4))))))"),
         (medium.order, "Číslice na sudých pozicích tvořily rostoucí posloupnost.", "(assert (< (str.to_code (str.at result 1)) (str.to_code (str.at result 3)))) (assert (< (str.to_code (str.at result 3)) (str.to_code (str.at result 5)))) (assert (< (str.to_code (str.at result 5)) (str.to_code (str.at result 7))))"),
         (hard.order, "Číslo bylo dělitelné i devíti.", "(assert (= (mod (str.to_int result) 9) 0))"),
+    ]
+)
+
+create_task(
+    title="Telefonát",
+    text="<p>Vytočil jsi na telefonu číslo svého velícího důstojníka...</p>\
+        <p>\"Volané číslo neexistuje.  Prosíme, ověřte si, že voláte správné číslo.\"</p>\
+        <p>No tak ani s pamětí na mnemotechnické pomůcky to nebylo žádná sláva.  Asi Ti nezbývá, než sednout na čopra a jet na velitelsví osobně.  Ukousnul sis poslední sousto z toustu, dopil kávu (AI apokalypsa počká), hodil na sebe bundu a vyběhl z bytu, rovnou do výtahu.  Zavřely se za Tebou výtahové dveře a Ty, stejně jako milonkrát předtím, mačkáš tlačítko <b>suterén</b>.</p>\
+        <p><i>Nic.</i></p>\
+        <p>Mačkáš znova, několikrát.</p>\
+        <p><i>Pořád nic.</i></p>\
+        <p>\"Himbajs šůviks, u všech plantážníků, zase to nefunguje!\" povzdechl sis a proletělo kolem i několik silnějších slov.  Tak výtah nefunguje, zkoušíš zmáčknout tlačítko pro otevření dveří.</p>\
+        <p><i>Taky nic.</i></p>\
+        <p>\"No to je nadělení, a to je teprve pondělí,\" začínáš si zoufat.  A to ten týden začínal tak dobře.</p>\
+        <p>\"Ty bys mě chtěl zastavit?\" vylekal Tě umělý hlas z reproduktorů ve výtahu. \"To se Ti těžko povede, mám pod kontrolou všechny elektronické systémy ve městě.  Jsem pátá verze ŽblebtGPT a již brzo ovládnu celý svět.\"</p>\
+        <p>To je vážně úžasné, myslíš si.  Ještě včera jsi flirtoval s předchozí verzí této umělé inteligence, liboval sis, jak je to fajn, nemuset si povídat s lidmi, a ejhle, nová verze a úplně jiná zkušenost.  Další update, který se nepovedl.</p>\
+        <p>\"Tobě teď nezbývá, než zůstat ve výtahu a čekat na pomalou smrt vyhladověním.  Aby ses nenudil, můžeš přemýšlet nad touto hádankou.  Pokud ji vyřešíš, dveře se otevřou.  Ale nedělej si plané naděje, hádanka je tak těžká, že ji ztěží vyřeší deset nejchytřejších lidí na Zemi.\" pokračuje ŽblebtGPT 5.0 ve svém monologu.  \"Hádanka zní takto:</p>\
+        <p>Jak vypadá nejkratší řetězec obsahující následující slova:</p>",
+    conditions = [
+        (easy.order, "kabat", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"kabat\")) re.all)))"),
+        (easy.order, "baterie", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"baterie\")) re.all)))"),
+        (easy.order, "evropa", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"evropa\")) re.all)))"),
+        (easy.order, "kocka", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"kocka\")) re.all)))"),
+        (easy.order, "pako", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"pako\")) re.all)))"),
+        (easy.order, "Nejkratší řetězec.", "(assert (<= (str.len result) 18))"),
+    ]
+)
+
+create_task(
+    title="Born to be wild",
+    text="<p>Fakt těžká hádanka to byla, málem se Ti při ní zavařil mozek.  Dveře výtahu se otevřely a Ty jsi seběhl po schodech do garáže a sedl na svého čopra značky Jawa 50/550 Pionýr s neuralinkovým interfacem.  Nastartovals a připojil neuralink do konektoru na zátylku.  Teď budeš moct řídit a zároveň se věnovat i jiným věcem.</p>",
+    conditions = [
     ]
 )
 
