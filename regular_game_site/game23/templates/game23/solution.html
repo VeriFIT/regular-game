@@ -1,0 +1,29 @@
+{% extends "./template.html" %}
+
+{% block content %}
+
+{% if points %}
+
+hahaha
+{{ points }}
+
+{% else %}
+<form autocomplete="off" action="{% url 'game23:solution_subm' %}" method="post">
+  {% csrf_token %}
+  <label class="btn btn-outline-primary w-100 mt-auto">Stanoviště 1</label>
+  <input type="text" class="form-control" id="answer1" name="answer1" placeholder="Zadej své jméno">
+  <br/>
+  <label class="btn btn-outline-primary w-100 mt-auto">Stanoviště 2</label>
+  <input type="text" class="form-control" id="answer2" name="answer2" placeholder="Zadej své jméno">
+  <br/>
+  <label class="btn btn-outline-primary w-100 mt-auto">Stanoviště 3</label>
+  <input type="text" class="form-control" id="answer3" name="answer3" placeholder="Zadej své jméno">
+  <br/>
+  <label class="btn btn-outline-primary w-100 mt-auto">Stanoviště 4</label>
+  <input type="text" class="form-control" id="answer4" name="answer4" placeholder="Zadej své jméno">
+  <br/>
+  <button type="submit" class="btn btn-primary px-4">Odeslat</button>
+</form>
+{% endif %}
+
+{% endblock %}

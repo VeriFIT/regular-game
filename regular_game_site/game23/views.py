@@ -159,3 +159,31 @@ def endgame(request, player_id):
                         'player': player,
                         'highscore_list': IndexView().get_queryset()
                     })
+
+# final solution
+def solution(request):
+    return render(request, 'game23/solution.html', {})
+
+# solution submit
+def solution_subm(request):
+    correct_num = 0
+    print(str(request))
+    for i in range(1,5):
+        box_id = f"answer{i}"
+        if box_id not in request.POST or not request.POST[box_id]:
+            continue
+        else:
+            answer = request.POST[box_id]
+
+            if i == 1:
+                pass   # password check
+            if i == 2:
+                pass   # password check
+            if i == 3:
+                pass   # password check
+            if i == 4:
+                pass   # password check
+
+            correct_num += 1
+
+    return render(request, 'game23/solution.html', {'points': correct_num})

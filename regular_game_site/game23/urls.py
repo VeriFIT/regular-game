@@ -10,4 +10,6 @@ urlpatterns = [
     path('start/', views.start_game, name='start_game'),
     path('player/<int:player_id>/answer', views.answer, name='answer'),
     path('player/<int:player_id>/endgame', views.endgame, name='endgame'),
+    path('solution', views.solution, name='solution'),
+    path('solution/subm', views.solution_subm, name='solution_subm'),
 ]
