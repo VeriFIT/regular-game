@@ -91,6 +91,7 @@ create_task(
     ]
 )
 
+############################### TASK ########################################
 create_task(
     title="Povolání do akce",
     text="<p>\"Agente,</p>\
@@ -109,6 +110,7 @@ create_task(
     ]
 )
 
+############################### TASK ########################################
 create_task(
     title="Telefonát",
     text="<p>Vytočil jsi na telefonu číslo svého velícího důstojníka...</p>\
@@ -134,6 +136,7 @@ create_task(
     ]
 )
 
+############################### TASK ########################################
 def coin_game_task(coin1, coin2):
     return f"Hážeš si mincí, která má na jedné straně číslo {coin1} a na druhé straně číslo {coin2}.  Čísla, která Ti padnou v jednotlivých hodech, sčítáš.  Hraješ, dokud Tě to nepřestane bavit.  Jaké je nejvyšší score, které při této hře <i>nemůžeš</i> dosáhnout?"
 
@@ -150,6 +153,40 @@ create_task(
 #       fpc_formula  # Explicit formula for FCP: a*b - a - b ~= 5*7 - 5 - 7 = 35 - 12 = 23
     ]
 )
+
+############################### TASK ########################################
+create_task(
+    title="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    text='''
+<pre>
+<code>
+while x == 0:
+  x = int(input('Enter your number: ')) % 10403
+if x == 0:
+  print('Your memory tells you that x is not the entered number.')
+
+heat = 133
+engine_internal_state = 0
+
+while True:
+  heat += 3
+
+  engine_internal_state ^= x
+
+  if engine_internal_state == 0:
+    print('Success! Your engine stared to cool down.')
+    break
+
+  if heat >= 31342:
+    print('Kaboom!')
+    assert(False)
+</code>
+</pre>''',
+    conditions = [
+    ]
+)
+
+############################### TASK ########################################
 
 create_task(
     title="Tutorial 1",
