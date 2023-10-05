@@ -184,7 +184,7 @@ Jak bys nastavil vstup kritické funkce, aby k přehřátí motoru nedošlo?
       overheat2()        # přehřátí motoru -> konec</code></pre>''',
     conditions = [
         (EASY_UP, "Nedojde k volání <code>overheat1()</code>" , "(assert (not (exists ((k Int)) (= (str.to_int result) (* k 10403)))))"),
-        (EASY_UP, "Nedojde k volání <code>overheat2()</code>." , "(assert (and (exists ((k Int) (l Int)) (and (< 0 l) (< 0 k) (= (* l (str.to_int result)) (* k 10403)) (< (* 3 l) 1000))) (not (exists ((k Int)) (= (str.to_int result) (* k 10403)))))))")
+        (EASY_UP, "Nedojde k volání <code>overheat2()</code>." , "(assert (and (exists ((k Int) (l Int)) (and (< 0 l) (< 0 k) (= (* l (str.to_int result)) (* k 10403)) (< (* 3 l) 1000))) (not (exists ((k Int)) (= (str.to_int result) (* k 10403))))))")
         # solutions: 101, 103
     ]
 )
