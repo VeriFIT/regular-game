@@ -134,7 +134,9 @@ create_task(
     ]
 )
 
-coin_game_tail = "Čísla, která Ti padnou v jednotlivých hodech, sčítáš.  Hraješ, dokud Tě to nepřestane bavit.  Jaké je nejvyšší score, které při této hře <i>nemůžeš</i> dosáhnout?"
+def coin_game_task(coin1, coin2):
+    return f"Hážeš si mincí, která má na jedné straně číslo {coin1} a na druhé straně číslo {coin2}.  Čísla, která Ti padnou v jednotlivých hodech, sčítáš.  Hraješ, dokud Tě to nepřestane bavit.  Jaké je nejvyšší score, které při této hře <i>nemůžeš</i> dosáhnout?"
+
 create_task(
     title="Born to be wild",
     text="<p>Fakt těžká hádanka to byla, málem se Ti při ní zavařil mozek.  Dveře výtahu se otevřely a Ty jsi seběhl po schodech do garáže a sedl na svého čopra značky Jawa 50/550 Pionýr s neuralinkovým interfacem a tachyonovým stabilizátorem.  Nastartovals a připojil neuralink do konektoru na zátylku.  Teď budeš moct řídit a zároveň se věnovat i jiným věcem.</p>\
@@ -142,9 +144,10 @@ create_task(
         <p>\"Jednu hádanku se Ti podařilo vyřešit, ale to byla spíše náhoda,\" slyšíš opět již povědomý syntetizovaný hlas ve stylu C-3PO. \"Tuto určitě neuhodneš:</p>\
         <p>Představ si, že hraješ následující hru.</p>",
     conditions = [
-        (EASY, "Hážeš si mincí, která má na jedné straně číslo 5 a na druhé straně číslo 7. " + coin_game_tail , "(assert (= (str.to_int result) 23))"),
-        (MEDIUM, "Hážeš si mincí, která má na jedné straně číslo 7 a na druhé straně číslo 11. " + coin_game_tail , "(assert (= (str.to_int result) 59))"),
-        (HARD, "Hážeš si mincí, která má na jedné straně číslo 17 a na druhé straně číslo 19. " + coin_game_tail , "(assert (= (str.to_int result) 287))"),
+        (EASY, coin_game_task(5, 7), "(assert (= (str.to_int result) 23))"),
+        (MEDIUM, coin_game_task(7, 11), "(assert (= (str.to_int result) 59))"),
+        (HARD, coin_game_task(17, 19), "(assert (= (str.to_int result) 287))"),
+#       fpc_formula  # Explicit formula for FCP: a*b - a - b ~= 5*7 - 5 - 7 = 35 - 12 = 23
     ]
 )
 
