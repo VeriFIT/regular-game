@@ -116,9 +116,7 @@ create_task(
     text="<p>Vytočil jsi na telefonu číslo svého velícího důstojníka...</p>\
         <p>\"Volané číslo neexistuje.  Prosíme, ověřte si, že voláte správné číslo.\"</p>\
         <p>No tak ani s pamětí na mnemotechnické pomůcky to nebylo žádná sláva.  Asi Ti nezbývá, než sednout na čopra a jet na velitelsví osobně.  Ukousnul sis poslední sousto z toustu, dopil kávu (AI apokalypsa počká), hodil na sebe bundu a vyběhl z bytu, rovnou do výtahu.  Zavřely se za Tebou výtahové dveře a Ty, stejně jako milonkrát předtím, mačkáš tlačítko <b>suterén</b>.</p>\
-        <p><i>Nic.</i></p>\
-        <p>Mačkáš znova, několikrát.</p>\
-        <p><i>Pořád nic.</i></p>\
+        <p><i>Nic.</i> Mačkáš znova, několikrát. <i>Pořád nic.</i></p>\
         <p>\"Himbajs šůviks, u všech plantážníků, zase to nefunguje!\" povzdechl sis a proletělo kolem i několik silnějších slov.  Tak výtah nefunguje, zkoušíš zmáčknout tlačítko pro otevření dveří.</p>\
         <p><i>Taky nic.</i></p>\
         <p>\"No to je nadělení, a to je teprve pondělí,\" začínáš si zoufat.  A to ten týden začínal tak dobře.</p>\
@@ -156,33 +154,38 @@ create_task(
 
 ############################### TASK ########################################
 create_task(
-    title="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    title="Critical heat level",
     text='''
-<pre>
-<code>
-while x == 0:
-  x = int(input('Enter your number: ')) % 10403
-if x == 0:
-  print('Your memory tells you that x is not the entered number.')
+<p>Vyjel jsi z garáže, projel podivně zmlklým městem a najel na dálnici.  Dosud jsi nepotkal ani živáčka.  Na dálnici prázdno.  Nakopnul jsi tachyonový stabilizátor a rozjel se závratnou rychlostí. Směr: Velitelství tajné služby.  Aspoň, že dálnice je prázdná a nemusíš kličkovat mezi auty a předjíždějícími se kamiony.</p>
+<p>Svištíš po dálnici a užíváš si výhled na protihlukové stěny. Krása, říkáš si.  Najednou pod Tebou začne čopr zrychlovat.  Ne, že bys nechtěl dorazit do cíle co nejdřív, ale pokud se Ti přehřeje motor, nedojedeš na velitelství, ale leda tak do servisu.  A tam by Ti s tím stejně asi nepomohli, protože (a) tachyonový stabilizátor sis na motorku přidělával sám, takže sorry, bez záruky a (b) s AI utrženou z řětězu za zády bys žádný servis taky vůbec nemusel najít.  Začneš tedy přes neuralinkový interface zkoumat řídící systém techyonového stabilizátoru.  I když jsi ho programoval před léty, kód, který vidíš, Ti není povědomý.  Že by se ŽblebtGPT dostala i do Tvého čopru?</p>
+<p>
+Jak bys nastavil vstup kritické funkce, aby k přehřátí motoru nedošlo?
+</p>
+<pre><code>fun stabilizer(x):
+  x = x % 10403        # zbytek po dělení 10403
+  if x == 0:
+    overheat1()        # přehřátí motoru -> konec
 
-heat = 133
-engine_internal_state = 0
+  engine_state = 0     # interní stav motoru
 
-while True:
-  heat += 3
+  heat = 133
 
-  engine_internal_state ^= x
+  while True:
+    heat += 3
 
-  if engine_internal_state == 0:
-    print('Success! Your engine stared to cool down.')
-    break
+    engine_state += x                     # přičte x
+    engine_state = engine_state % 10403   # zbytek po dělení 10403
 
-  if heat >= 31342:
-    print('Kaboom!')
-    assert(False)
-</code>
-</pre>''',
+    if engine_state == 0:
+      heat = 0
+      return
+
+    if heat >= 1000:
+      overheat2()        # přehřátí motoru -> konec</code></pre>''',
     conditions = [
+        (EASY_UP, "Nedojde k volání <code>overheat1()</code>" , "(assert (not (exists ((k Int)) (= (str.to_int result) (* k 10403)))))"),
+        (EASY_UP, "Nedojde k volání <code>overheat2()</code>." , "(assert (and (exists ((k Int) (l Int)) (and (< 0 l) (< 0 k) (= (* l (str.to_int result)) (* k 10403)) (< (* 3 l) 1000))) (not (exists ((k Int)) (= (str.to_int result) (* k 10403)))))))")
+        # solutions: 101, 103
     ]
 )
 

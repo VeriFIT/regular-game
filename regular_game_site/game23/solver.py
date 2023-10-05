@@ -13,7 +13,8 @@ def build_smt_string(cond, value):
 
     text = f"""
 (set-info :smt-lib-version 2.6)
-(set-logic QF_SLIA)
+(set-logic ALL)
+;(set-logic QF_SLIA)
 (declare-fun result () String)
 {cond}
 (assert (= result "{value}"))
