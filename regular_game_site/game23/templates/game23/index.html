@@ -9,7 +9,7 @@
     <div class="row">
       <!-- Left column with the task, conditions and reply form -->
       <div class="col-md-9">
-      {% if player.score >= 150 %}
+      {% if player.difficulty.name == "Jednoduchá" and player.score >= 60 or player.difficulty.name == "Normální" and player.score >= 100 or player.difficulty.name == "Těžká" and player.score >= 380 %}
         <div class="alert alert-success text-center">
           <strong>Gratulujeme, podařilo se Ti zabránit nadvládě umělé inteligence a zániku celého lidstva!</strong><br>
           <strong>Kam dál?</strong> Vyzkoušej další zábavné <a href="https://neal.fun/password-game/" alt="Hesla" target="_blank" rel="noopener noreferrer">hlavolamy s podmínkami</a> nebo <a href="https://regexcrossword.com/" alt="Regexove krizovky" target="_blank" rel="noopener noreferrer">regexové hlavolamy</a>.
@@ -99,6 +99,7 @@
                 <li class="list-group-item list-group-item-success">Zjednodušené verze některých misí.</li>
                 <li class="list-group-item list-group-item-success">Žádná penalizace za přeskočení mise.</li>
                 <li class="list-group-item list-group-item-success">Žádná penalizace za špatnou odpověď.</li>
+                <li class="list-group-item list-group-item-success">Lze vyhrát i bez znalosti programování.</li>
                 <li class="list-group-item list-group-item-danger">Málo bodů za každou úspěšně vyřešenou misi.</li>
               </ul>   
             </div>
@@ -118,6 +119,7 @@
                 <li class="list-group-item"><b>Obtížnost: <span style="color: orange">Normální</span></b></li>
                 <li class="list-group-item list-group-item-success">Průměrně obtížná verze některých misí.</li>
                 <li class="list-group-item list-group-item-success">Standardní počet bodů za každou úspěšně vyřešenou misi.</li>
+                <li class="list-group-item list-group-item-success">Lze vyhrát i bez znalosti programování.</li>
                 <li class="list-group-item list-group-item-danger">Malá penalizace za špatnou odpověď.</li>
                 <li class="list-group-item list-group-item-danger">Malá penalizace za přeskočení mise.</li>
               </ul>   
@@ -138,6 +140,7 @@
                 <li class="list-group-item"><b>Obtížnost: <span style="color: red">Těžká</span></b></li>
                 <li class="list-group-item list-group-item-success">Hodně bodů za každou úspěšně vyřešenou misi.</li>
                 <li class="list-group-item list-group-item-danger">Některé mise budou těžší.</li>
+                <li class="list-group-item list-group-item-danger">Pro výhru je potřeba umět číst kód.</li>
                 <li class="list-group-item list-group-item-danger">Větší penalizace za špatnou odpověď.</li>
                 <li class="list-group-item list-group-item-danger">Větší penalizace za přeskočení mise.</li>
               </ul>   

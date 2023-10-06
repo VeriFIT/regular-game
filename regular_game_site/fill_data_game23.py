@@ -130,7 +130,7 @@ create_task(
         (EASY_UP, "evropa", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"evropa\")) re.all)))"),
         (EASY_UP, "kocka", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"kocka\")) re.all)))"),
         (EASY_UP, "pako", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"pako\")) re.all)))"),
-        (EASY_UP, "Nejkratší řetězec.", "(assert (<= (str.len result) 18))"),
+        (EASY_UP, "<Řetězec musí být nejkratší možný>.", "(assert (<= (str.len result) 18))"),
     ]
 )
 
@@ -225,7 +225,7 @@ create_task(
     title="Vzpomínka na dědečka",
     text='''
     <p>Snad se Ti už konečně podařilo chytnout všechny problémy v kódu a zbývající část cesty bude klidná.  Po pár kilometrech ale Tvůj čopr začne zpomalovat, až se úplně zastaví.  Chyba elektroniky?  Uděláš neurolinkový sken operačního systému včetně hloubkového skenu všech subsystémů, ale nemůžeš tomu přijít na kloub.  Pak se podíváš na kontrolku benzínu a najednou víš, co je za problém.  To snad není možné, vždyť jsi přeci nedávno tankoval! Teď s tím stejně asi už nic nenaděláš.</p>
-    <p>Rozhlížíš se kolem sebe a přemýšlíš co dál.  Kousek za krajnicí zahlédneš něco, co z dálky vypadá jako hromada železa.  Přiblížíš se k tomu a zjistíš, že jde starou sovětskou samohybnou houfnici.  Vzpomeneš si na své mládí, kdy sis s podobnou hrával na zahradě u svého dědečka.  Co zkusit zbytek cesty absolvovat v této starožitnosti?  Lepší než šlapat.
+    <p>Rozhlížíš se kolem sebe a přemýšlíš co dál.  Kousek za krajnicí zahlédneš něco, co z dálky vypadá jako hromada železa.  Přiblížíš se k tomu a zjistíš, že jde o starou sovětskou samohybnou houfnici.  Vzpomeneš si na své mládí, kdy sis s podobnou hrával na zahradě u svého dědečka.  Co zkusit zbytek cesty absolvovat v této starožitnosti?  Lepší než šlapat.
     </p>
     <p>
     Vlezl jsi do kabiny a rozhlížíš se, jak by šlo tuto horu železa uvést do pohybu.  Nastartovat se Ti podařilo bez problémů, ale vypadá to, že budou problémy s převodovkou&mdash;řazení rychlostí je velmi obtížné.  Že by byl problém s rozložením oleje v převodovce?

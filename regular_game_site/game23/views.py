@@ -169,7 +169,7 @@ def solution_subm(request):
     correct_num = 0
     wrong_ans = []
     post_names = []
-    post_names_list = ["", "hádanky", "hledání chyb v kódu", "vizuálního programování", "webové hry"]
+    post_names_list = ["", "logických hádanek", "hledání chyb v kódu", "vizuálního programování", "webové hry"]
     for i in range(1,5):
         box_id = f"answer{i}"
         if box_id not in request.POST or not request.POST[box_id]:
@@ -183,7 +183,8 @@ def solution_subm(request):
                 correct_num += 1
                 post_names += [post_names_list[i]]
             except:
-                wrong_ans += [i]
+                wrong_ans.append(answer)
+
 
     if wrong_ans:
         return render(request, 'game23/solution.html', {'wrong_answers': wrong_ans})
