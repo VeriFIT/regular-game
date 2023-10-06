@@ -254,7 +254,7 @@ create_task(
 Po pěti minutách jízdy upoutala Tvou pozornost cedulka "Řídicí středisko ŽblebtGPT" se šipkou vpravo.  Podíval ses doprava a v dáli vidíš velkou bílou budovu.  Toto může být jedinečná příležitost, jak umělou inteligenci zastavit!
 </p>
 <p>
-Otočil jsi kanón houfnice vpravo a začal jsi studovat jeho ovládání.  Našel si starý manuál, dle nějž se k zaměřování používají 3 tlačítka: A, B a C. Je potřeba zmáčknout je v nějakém pořadí, a o nastavení cílové pozice na souřadnicovém systému [x,y] se pak postará následující algoritmus:
+Otočil jsi kanón houfnice vpravo a začal si studovat jeho ovládání.  Našel si starý manuál, dle nějž se k zaměřování používají 3 tlačítka: A, B a C. Je potřeba zmáčknout je v nějakém pořadí, a o nastavení cílové pozice na souřadnicovém systému [x,y] se pak postará následující algoritmus:
 </p>
 <pre><code>fun target(in):
   x = 8
