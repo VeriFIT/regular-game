@@ -168,6 +168,8 @@ def solution(request):
 def solution_subm(request):
     correct_num = 0
     wrong_ans = []
+    post_names = []
+    post_names_list = ["", "hádanky", "hledání chyb v kódu", "vizuálního programování", "webové hry"]
     for i in range(1,5):
         box_id = f"answer{i}"
         if box_id not in request.POST or not request.POST[box_id]:
@@ -178,10 +180,11 @@ def solution_subm(request):
             try:
                 PartialKey.objects.get(stand=i, value=answer)
                 correct_num += 1
+                post_names += [post_names[i]]
             except:
                 wrong_ans += [i]
 
     if wrong_ans:
         return render(request, 'game23/solution.html', {'wrong_answers': wrong_ans})
     else:
-        return render(request, 'game23/solution.html', {'points': correct_num})
+        return render(request, 'game23/solution.html', {'points': correct_num, 'trophies': post_names})

@@ -6,27 +6,44 @@
 {% endif %}
 
 {% if points %}
+<div class="container w-auto my-5 text-center">
+  {% if points %}
+  <h2><b>Gratulujeme, vyřešili jste správně {{ points }} ze 4 stanovišť!</b></h2>
+  <!-- Trophies -->
+  <div class="row mt-4">
+    {% for trophy in trophies %}
+    <div class="col col-12 col-md-6 my-3">
+      <div class="alert alert-success text-center h-100">
+        <h3>Stanoviště {{ trophy }}</h3>
+        <img class="mx-auto d-block" src="https://clipground.com/images/trophy-clipart-19.jpg" alt="Trofej" width="200"/>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 
-hahaha
-{{ points }}
+  {% else %}
+  <form autocomplete="off" action="{% url 'game23:solution_subm' %}" method="post">
+    {% csrf_token %}
+    <h3>Stanoviště hádanky</h3>
+    <input type="text" class="form-control" id="answer1" name="answer1" placeholder="Heslo stanoviště">
+    <br/>
+    <h3>Stanoviště hledání chyb v kódu</h3>
+    <input type="text" class="form-control" id="answer2" name="answer2" placeholder="Heslo stanoviště">
+    <br/>
+    <h3>Stanoviště vizuálního programování</h3>
+    <input type="text" class="form-control" id="answer3" name="answer3" placeholder="Heslo stanoviště">
+    <br/>
+    <h3>Stanoviště webové hry</h3>
+    <input type="text" class="form-control" id="answer4" name="answer4" placeholder="Heslo stanoviště">
+    <br/>
+    <button type="submit" class="btn btn-primary px-4">Odeslat</button>
+  </form>
+  {% endif %}
 
-{% else %}
-<form autocomplete="off" action="{% url 'game23:solution_subm' %}" method="post">
-  {% csrf_token %}
-  <label class="btn btn-outline-primary w-100 mt-auto">Stanoviště 1</label>
-  <input type="text" class="form-control" id="answer1" name="answer1" placeholder="Zadej své jméno">
-  <br/>
-  <label class="btn btn-outline-primary w-100 mt-auto">Stanoviště 2</label>
-  <input type="text" class="form-control" id="answer2" name="answer2" placeholder="Zadej své jméno">
-  <br/>
-  <label class="btn btn-outline-primary w-100 mt-auto">Stanoviště 3</label>
-  <input type="text" class="form-control" id="answer3" name="answer3" placeholder="Zadej své jméno">
-  <br/>
-  <label class="btn btn-outline-primary w-100 mt-auto">Stanoviště 4</label>
-  <input type="text" class="form-control" id="answer4" name="answer4" placeholder="Zadej své jméno">
-  <br/>
-  <button type="submit" class="btn btn-primary px-4">Odeslat</button>
-</form>
-{% endif %}
+  <form action="{% url 'game23:index' %}" method="get">
+    {% csrf_token %}
+    <button type="submit" class="mt-3 btn btn-primary">Zpět na úvodní stránku</button>
+  </form>
+</div>
 
 {% endblock %}
