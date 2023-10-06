@@ -130,7 +130,8 @@ create_task(
         (EASY_UP, "evropa", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"evropa\")) re.all)))"),
         (EASY_UP, "kocka", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"kocka\")) re.all)))"),
         (EASY_UP, "pako", "(assert (str.in_re result (re.++ (re.++ re.all (str.to_re \"pako\")) re.all)))"),
-        (EASY_UP, "<Řetězec musí být nejkratší možný>.", "(assert (<= (str.len result) 18))"),
+        (EASY_UP, "<Řetězec musí být krátký>.", "(assert (<= (str.len result) 20))"),
+        (MEDIUM_UP, "<Řetězec musí být nejkratší možný>.", "(assert (<= (str.len result) 18))"),
     ]
 )
 
