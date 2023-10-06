@@ -197,7 +197,7 @@ create_task(
 <p>Vypadá to, že se Ti podařilo zkrotit tachyonový stabilizátor, ale motor stále jede na plné obrátky. Zkoušíš hledat přes neuralinkové rozhraní další problémy, a brzo objevíš tento kus kódu:
 </p>
 <pre><code>fun fuel_injection(x):
-  if x < 200 or x > 500:
+  if x < 300 or x > 500:
     overheat1()
   y = 1
   for i from 1 to 751:
@@ -213,7 +213,7 @@ create_task(
 Jak bys nastavil vstup této funkce, aby k přehřátí motoru nedošlo?
 </p>''',
     conditions = [
-        (EASY_UP, "Nedojde k volání <code>overheat1()</code>" , "(assert (and (< 199 (str.to_int result)) (> 501 (str.to_int result))))"),
+        (EASY_UP, "Nedojde k volání <code>overheat1()</code>" , "(assert (and (< 299 (str.to_int result)) (> 501 (str.to_int result))))"),
         (EASY_UP, "Nedojde k volání <code>overheat2()</code>." , "(assert (= (str.to_int result) 480))")
         # solution: 480 (little Fermat theorem)
     ]
