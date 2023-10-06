@@ -115,7 +115,7 @@ create_task(
     title="Telefonát",
     text="<p>Vytočil jsi na telefonu číslo svého velícího důstojníka...</p>\
         <p>\"Volané číslo neexistuje.  Prosíme, ověřte si, že voláte správné číslo.\"</p>\
-        <p>No tak ani s pamětí na mnemotechnické pomůcky to nebylo žádná sláva.  Asi Ti nezbývá, než sednout na čopra a jet na velitelsví osobně.  Ukousnul sis poslední sousto z toustu, dopil kávu (AI apokalypsa počká), hodil na sebe bundu a vyběhl z bytu, rovnou do výtahu.  Zavřely se za Tebou výtahové dveře a Ty, stejně jako milonkrát předtím, mačkáš tlačítko <b>suterén</b>.</p>\
+        <p>No tak ani s pamětí na mnemotechnické pomůcky to nebylo žádná sláva.  Asi Ti nezbývá, než sednout na čopra a jet na velitelsví osobně.  Ukousnul sis poslední sousto z toustu, dopil kávu (AI apokalypsa počká), hodil na sebe bundu a vyběhl z bytu, rovnou do výtahu.  Zavřely se za Tebou výtahové dveře a Ty, stejně jako milionkrát předtím, mačkáš tlačítko <b>suterén</b>.</p>\
         <p><i>Nic.</i> Mačkáš znova, několikrát. <i>Pořád nic.</i></p>\
         <p>\"Himbajs šůviks, u všech plantážníků, zase to nefunguje!\" povzdechl sis a proletělo kolem i několik silnějších slov.  Tak výtah nefunguje, zkoušíš zmáčknout tlačítko pro otevření dveří.</p>\
         <p><i>Taky nic.</i></p>\
