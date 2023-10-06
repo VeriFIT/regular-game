@@ -3,11 +3,11 @@
 {% block content %}
 
 
-<div class="container mt-4" style="max-width: 90%">
+<div class="container mt-4"> <!-- style="max-width: 90%"> -->
   <h2>Mise {{ task.num }}/{{ tasks_cnt }}: {{ task.title }}</h2>
   <div class="row">
     <!-- Left column with the task, conditions and reply form -->
-    <div class="col-sm">
+    <div class="col col-md-9">
 
       <!-- Task description -->
       <div class="alert alert-info">
@@ -15,9 +15,9 @@
       </div>
 
       <!-- Condition cards -->
-      <div class="row row-cols-2 gx-3 gy-3">
+      <div class="row gx-3 gy-3">
         {% for cond, satisfied in conditions.items %}
-        <div class="col">
+        <div class="col-12 col-md-6">
           {% if satisfied is None %}
           <div class="card h-100">
             <div class="card-header">Podmínka {{ forloop.counter }}</div>
@@ -51,33 +51,34 @@
       </div>
 
       <!-- Submit Form -->
-      <div class="container">
+      <div class="container mb-5">
         <form autocomplete="off" action="{% url 'game23:answer' player.id %}" method="post">
           {% csrf_token %}
-          <div class="row mt-4">
-            <div class="col-sm-3"></div>
-            <label class="col-sm-1 col-form-label" for="result"><strong>Odpověď:</strong></label>
-            <div class="col-sm-4">
+          <div class="row mt-4 justify-content-center">
+            <label class="col-sm-auto col-form-label" for="result"><strong>Odpověď:</strong></label>
+            <div class="col-sm-auto">
               {% if result %}
                 <input type="text" class="form-control" id="result" name="result" value="{{ result }}" oninput="countChars('result', 'displayto')">
               {% else %}
                 <input type="text" class="form-control" id="result" name="result" placeholder="Zadejte odpověď" oninput="countChars('result', 'displayto')">
               {% endif %}
             </div>
-            <div class="col-sm-1 col-form-label"><span id="displayto">{{ result_len }}</span></div>
+            <div class="col-sm-auto col-form-label"><span id="displayto">{{ result_len }}</span></div>
           </div>
-          <div class="row mt-2 mb-3">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-              <button type="submit" name="submit" class="me-2 btn btn-success">Odpovědět</button>
-              <button type="submit" name="skip" class="mx-2 btn btn-warning">Přeskočit</button>
-              <button type="submit" name="giveup" class="mx-2 btn btn-danger">Ukončit</button>
+          <div class="row my-2 justify-content-center">
+            <div class="col-sm-auto">
+              <button type="submit" name="submit" class="btn btn-success">Odpovědět</button>
+            </div>
+            <div class="col-sm-auto">
+              <button type="submit" name="skip" class="btn btn-warning">Přeskočit</button>
+            </div>
+            <div class="col-sm-auto">
+              <button type="submit" name="giveup" class="btn btn-danger">Ukončit</button>
             </div>
           </div>
           {% if error_message %}
-          <div class="row mb-3">
-            <div class="col-sm-3"></div>
-            <div class="alert alert-danger col-sm-6">
+          <div class="row my-3 justify-content-center">
+            <div class="alert alert-danger col-auto">
               <strong>Chyba!</strong> {{ error_message }}
             </div>
           </div>
@@ -88,11 +89,11 @@
     </div>
 
     <!-- Right column with player stats -->
-    <div class="col-sm-auto">
+    <div class="col col-auto col-md-3">
 
       <!-- Player -->
-      <div class="card">
-        <img class="card-img-top" src="{{ player.difficulty.avatar_url }}" alt="{{ player.difficulty.avatar }}" style="height: 9.2vw; object-fit: cover;">
+      <div class="card mb-5">
+        <img class="card-img-top" src="{{ player.difficulty.avatar_url }}" alt="{{ player.difficulty.avatar }}" style="height: 175px; object-fit: cover;">
         <div class="card-body">
           <h5 class="card-title">Agent {{ player.name }}</h5>
           <ul class="list-group list-group-flush">

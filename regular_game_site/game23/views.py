@@ -167,6 +167,7 @@ def solution(request):
 # solution submit
 def solution_subm(request):
     correct_num = 0
+    post_names = []
     print(str(request))
     for i in range(1,5):
         box_id = f"answer{i}"
@@ -176,14 +177,14 @@ def solution_subm(request):
             answer = request.POST[box_id]
 
             if i == 1:
-                pass   # password check
+                post_names.append("hádanky")   # password check
             if i == 2:
-                pass   # password check
+                post_names.append("hledání chyb v kódu")   # password check
             if i == 3:
-                pass   # password check
+                post_names.append("vizuálního programování")   # password check
             if i == 4:
-                pass   # password check
+                post_names.append("webové hry")   # password check
 
             correct_num += 1
 
-    return render(request, 'game23/solution.html', {'points': correct_num})
+    return render(request, 'game23/solution.html', {'points': correct_num, 'trophies': post_names})
