@@ -156,7 +156,7 @@ create_task(
 create_task(
     title="Critical heat level",
     text='''
-<p>Vyjel jsi z garáže, projel podivně zmlklým městem a najel na dálnici.  Dosud jsi nepotkal ani živáčka.  Na dálnici prázdno.  Nakopnul jsi tachyonový stabilizátor a rozjel se závratnou rychlostí. Směr: Velitelství FDTO.  Aspoň, že dálnice je prázdná a nemusíš kličkovat mezi auty a předjíždějícími se kamiony.</p>
+<p>Vyjels z garáže, projel podivně zmlklým městem a najel na dálnici.  Dosud si nepotkal ani živáčka.  Na dálnici prázdno.  Nakopnuls tachyonový stabilizátor a rozjel se závratnou rychlostí. Směr: Velitelství FDTO.  Aspoň, že dálnice je prázdná a nemusíš kličkovat mezi auty a předjíždějícími se kamiony.</p>
 <p>Svištíš po dálnici a užíváš si výhled na protihlukové stěny. Krása, říkáš si.  Najednou pod Tebou začne čopr zrychlovat.  Ne, že bys nechtěl dorazit do cíle co nejdřív, ale pokud se Ti přehřeje motor, nedojedeš na velitelství, ale leda tak do servisu.  A tam by Ti s tím stejně asi nepomohli, protože (a) tachyonový stabilizátor sis na motorku přidělával sám, takže sorry, bez záruky a (b) s AI utrženou z řětězu za zády bys žádný servis taky vůbec nemusel najít.  Začneš tedy přes neuralinkový interface zkoumat řídící systém techyonového stabilizátoru.  I když jsi ho programoval před léty, kód, který vidíš, Ti není povědomý.  Že by se ŽblebtGPT dostala i do Tvého čopru?</p>
 <pre><code>fun stabilizer(x):
   x = x % 10403        # zbytek po dělení 10403
@@ -254,7 +254,7 @@ create_task(
 Po pěti minutách jízdy upoutala Tvou pozornost cedulka "Řídicí středisko ŽblebtGPT" se šipkou vpravo.  Podíval ses doprava a v dáli vidíš velkou bílou budovu.  Toto může být jedinečná příležitost, jak umělou inteligenci zastavit!
 </p>
 <p>
-Otočil jsi kanón houfnice vpravo a začal jsi studovat jeho ovládání.  Našel jsi starý manuál, dle nějž se k zaměřování používají 3 tlačítka: A, B a C. Je potřeba zmáčknout je v nějakém pořadí, a o nastavení cílové pozice na souřadnicovém systému [x,y] se pak postará následující algoritmus:
+Otočil jsi kanón houfnice vpravo a začal jsi studovat jeho ovládání.  Našel si starý manuál, dle nějž se k zaměřování používají 3 tlačítka: A, B a C. Je potřeba zmáčknout je v nějakém pořadí, a o nastavení cílové pozice na souřadnicovém systému [x,y] se pak postará následující algoritmus:
 </p>
 <pre><code>fun target(in):
   x = 8
