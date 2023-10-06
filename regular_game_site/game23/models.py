@@ -25,12 +25,12 @@ class Difficulty(models.Model):
 
     def __str__(self):
         return f"{self.name}"
-    
+
     # def __eq__(self, other):
     #     if not isinstance(other, Difficulty):
     #         return NotImplemented
     #     return self.order == other.order
-    
+
     def __lte__(self, other):
         if not isinstance(other, Difficulty):
             return NotImplemented
@@ -98,3 +98,13 @@ class Condition(models.Model):
 
     def __str__(self):
         return f'{self.text}'
+
+
+# A partial key for getting to the master result
+class PartialKey(models.Model):
+    stand = models.IntegerField()
+    value = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f'{self.stand}: {self.value}'
+

@@ -7,7 +7,7 @@ import django
 from django.db import IntegrityError
 django.setup()
 
-from game23.models import Task, Condition, Difficulty
+from game23.models import Task, Condition, Difficulty, PartialKey
 
 num = 1
 
@@ -322,3 +322,36 @@ V hledáčku vidíš, že řídicí středisko je na souřadnicích x = 12, y = 
 #         ),
 #     ]
 # )
+
+
+
+# Filling keys
+keys1 = [
+        "key1"
+        ]
+
+keys2 = [
+        "key2"
+        ]
+
+keys3 = [
+        "key3"
+        ]
+
+keys4 = [
+        "key4"
+        ]
+
+all_keys = [keys1, keys2, keys3, keys4]
+
+# first delete
+PartialKey.objects.all().delete()
+
+for i in range(0, len(all_keys)):
+    for key in all_keys[i]:
+        partial_key = PartialKey()
+        partial_key.stand = i+1
+        partial_key.value = key
+        partial_key.save()
+
+
