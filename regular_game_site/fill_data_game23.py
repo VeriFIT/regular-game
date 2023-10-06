@@ -200,9 +200,9 @@ create_task(
   if x < 300 or x > 500:
     overheat1()
   y = 1
-  for i from 1 to 751:
+  for i from 1 to (271 + x):
     y *= 271
-    y = y % (271+x)
+    y = y % 751
 
   if y != 271:
     overheat2()        # přehřátí motoru -> konec
@@ -214,8 +214,8 @@ Jak bys nastavil vstup této funkce, aby k přehřátí motoru nedošlo?
 </p>''',
     conditions = [
         (EASY_UP, "Nedojde k volání <code>overheat1()</code>" , "(assert (and (< 299 (str.to_int result)) (> 501 (str.to_int result))))"),
-        (EASY_UP, "Nedojde k volání <code>overheat2()</code>." , "(assert (= (str.to_int result) 480))")
-        # solution: 480 (little Fermat theorem)
+        (EASY_UP, "Nedojde k volání <code>overheat2()</code>." , "(assert (or (= (str.to_int result) 480) (= (str.to_int result) 355)))")
+        # solution: 480 (little Fermat theorem) , also 355
     ]
 )
 
