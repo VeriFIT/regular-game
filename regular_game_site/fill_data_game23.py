@@ -222,7 +222,7 @@ Jak bys nastavil vstup této funkce, aby k přehřátí motoru nedošlo?
 ############################### TASK ########################################
 
 create_task(
-    title="XXXXXXXXXXXXXXXXXXXXXXXXX",
+    title="Vzpomínka na dědečka",
     text='''
     <p>Snad se Ti už konečně podařilo chytnout všechny problémy v kódu a zbývající část cesty bude klidná.  Po pár kilometrech ale Tvůj čopr začne zpomalovat, až se úplně zastaví.  Chyba elektroniky?  Uděláš neurolinkový sken operačního systému včetně hloubkového skenu všech subsystémů, ale nemůžeš tomu přijít na kloub.  Pak se podíváš na kontrolku benzínu a najednou víš, co je za problém.  To snad není možné, vždyť jsi přeci nedávno tankoval! Teď s tím stejně asi už nic nenaděláš.</p>
     <p>Rozhlížíš se kolem sebe a přemýšlíš co dál.  Kousek za krajnicí zahlédneš něco, co z dálky vypadá jako hromada železa.  Přiblížíš se k tomu a zjistíš, že jde starou sovětskou samohybnou houfnici.  Vzpomeneš si na své mládí, kdy sis s podobnou hrával na zahradě u svého dědečka.  Co zkusit zbytek cesty absolvovat v této starožitnosti?  Lepší než šlapat.
@@ -244,17 +244,66 @@ create_task(
 )
 
 
-
 ############################### TASK ########################################
 
 create_task(
-    title="Tutorial 1",
-    text="Heslo musí obsahovat řetězec \"VeriFIT\" a navíc jeho první dva znaky musí odpovídat posledním dvěma znakům.",
+    title="Neočekávaná příležitost",
+    text="""
+<p>S fungující převodovkou se Ti podařilo vyjet s houfnicí na dálnici a pokračovat v cestě na velitelství.</p>
+<p>
+Po pěti minutách jízdy upoutala Tvou pozornost cedulka "Řídicí středisko ŽblebtGPT" se šipkou vpravo.  Podíval ses doprava a v dáli vidíš velkou bílou budovu.  Toto může být jedinečná příležitost, jak umělou inteligenci zastavit!
+</p>
+<p>
+Otočil jsi kanón houfnice vpravo a začal jsi studovat jeho ovládání.  Našel jsi starý manuál, dle nějž se k zaměřování používají 3 tlačítka: A, B a C. Je potřeba zmáčknout je v nějakém pořadí, a o nastavení cílové pozice na souřadnicovém systému [x,y] se pak postará následující algoritmus:
+</p>
+<pre><code>fun target(in):
+  x = 8
+  y = 11
+  for i from 1 to len(in):
+    if in[i] = 'A':
+      x = x + 3
+      y = y - 1
+    else if in[i] = 'B':
+      x = x + 3
+      y = y + 5
+    else if in[i] = 'C':
+      x = x - 2
+      y = y - 3
+    else:
+      error()             # chyba
+
+  fire()                  # výstřel!</code></pre>
+<p>
+V hledáčku vidíš, že řídicí středisko je na souřadnicích x = 12, y = 10.  V hlavni kanónu je jeden náboj, žádné další kolem nevidíš.  Jakou zaměřovací sekvenci nastavíš?
+</p>
+    """,
     conditions = [
-        (EASY_UP, "Heslo musí obsahovat řetězec \"VeriFIT\".", "(assert (str.contains result \"VeriFIT\"))"),
-        (EASY_UP, "První dva znaky musí odpovídat posledním dvěma znakům.", "(assert (= (str.substr result 0 2) (str.substr result (- (str.len result) 2) 2)))"),
+        (EASY_UP, "Houfnice musí zamířit na souřadnice [12,10].", """
+        (assert (str.in_re result (re.* (re.range "A" "C"))))
+        (declare-const As Int)
+        (declare-const Bs Int)
+        (declare-const Cs Int)
+        (assert (= As (str.len (str.replace_all (str.replace_all result "B" "") "C" ""))))
+        (assert (= Bs (str.len (str.replace_all (str.replace_all result "A" "") "C" ""))))
+        (assert (= Cs (str.len (str.replace_all (str.replace_all result "A" "") "B" ""))))
+        (assert (= (+ 8 (* 3 As) (* 3 Bs) (* -2 Cs)) 12))
+        (assert (= (+ 11 (* -1 As) (* 5 Bs) (* -3 Cs)) 10))
+        """)
+        # solution: A:2 B:8 C:13 (e.g.)
     ]
 )
+
+
+# ############################### TASK ########################################
+#
+# create_task(
+#     title="Tutorial 1",
+#     text="Heslo musí obsahovat řetězec \"VeriFIT\" a navíc jeho první dva znaky musí odpovídat posledním dvěma znakům.",
+#     conditions = [
+#         (EASY_UP, "Heslo musí obsahovat řetězec \"VeriFIT\".", "(assert (str.contains result \"VeriFIT\"))"),
+#         (EASY_UP, "První dva znaky musí odpovídat posledním dvěma znakům.", "(assert (= (str.substr result 0 2) (str.substr result (- (str.len result) 2) 2)))"),
+#     ]
+# )
 
 # # NOTE: We cannot allow non-constant number of digits in the password or z3 times out
 # fpc_formula = '''
