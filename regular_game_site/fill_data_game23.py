@@ -206,9 +206,9 @@ create_task(
 
   if y != 271:
     overheat2()        # přehřátí motoru -> konec
-
-  heat = 0
-  return</code></pre>
+  else:
+    heat = 0
+    return</code></pre>
 <p>
 Jak bys nastavil vstup této funkce, aby k přehřátí motoru nedošlo?
 </p>''',
@@ -218,6 +218,32 @@ Jak bys nastavil vstup této funkce, aby k přehřátí motoru nedošlo?
         # solution: 480 (little Fermat theorem)
     ]
 )
+
+############################### TASK ########################################
+
+create_task(
+    title="XXXXXXXXXXXXXXXXXXXXXXXXX",
+    text='''
+    <p>Snad se Ti už konečně podařilo chytnout všechny problémy v kódu a zbývající část cesty bude klidná.  Po pár kilometrech ale Tvůj čopr začne zpomalovat, až se úplně zastaví.  Chyba elektroniky?  Uděláš neurolinkový sken operačního systému včetně hloubkového skenu všech subsystémů, ale nemůžeš tomu přijít na kloub.  Pak se podíváš na kontrolku benzínu a najednou víš, co je za problém.  To snad není možné, vždyť jsi přeci nedávno tankoval! Teď s tím stejně asi už nic nenaděláš.</p>
+    <p>Rozhlížíš se kolem sebe a přemýšlíš co dál.  Kousek za krajnicí zahlédneš něco, co z dálky vypadá jako hromada železa.  Přiblížíš se k tomu a zjistíš, že jde starou sovětskou samohybnou houfnici.  Vzpomeneš si na své mládí, kdy sis s podobnou hrával na zahradě u svého dědečka.  Co zkusit zbytek cesty absolvovat v této starožitnosti?  Lepší než šlapat.
+    </p>
+    <p>
+    Vlezl jsi do kabiny a rozhlížíš se, jak by šlo tuto horu železa uvést do pohybu.  Nastartovat se Ti podařilo bez problémů, ale vypadá to, že budou problémy s převodovkou&mdash;řazení rychlostí je velmi obtížné.  Že by byl problém s rozložením oleje v převodovce?
+    </p>
+    <p>
+    Podíváš se na kontrolku převodovky a Tvé podezření je potvrzeno.  Kontrolka ukazuje hodnotu 92, což je hluboce v červené oblasti.  Jediné zelené číslo na číselníku je 0.  U záporných čísel je papírek, na němž je napsáno <b>кавоом!</b>, takže těm by ses taky raději měl vyhnout.  V této chvíli jsi schopný na převodovce zařadit stupně C a E. Z dětství si pamatuješ, že když zařadíš stupeň C, tak hodnota na číselníku klesne o 13, a když zařadíš stupeň E, tak hodnota klesne o 9.  Jaká je sekvence rychlostí taková, abys na číselníku dosáhl nuly a mohl tedy odjet zastavit umělou inteligenci?
+    </p>
+    ''',
+    conditions = [
+        (EASY_UP, "Na číselníku je potřeba dosáhnout hodnoty 0." , """
+         (assert (= (str.len result) 8))
+         (assert (str.in_re result ((_ re.^ 5) (re.++ (re.++ re.all (str.to_re \"C\")) re.all))))
+         (assert (str.in_re result ((_ re.^ 3) (re.++ (re.++ re.all (str.to_re \"E\")) re.all))))
+        """),
+    ]
+)
+
+
 
 ############################### TASK ########################################
 
