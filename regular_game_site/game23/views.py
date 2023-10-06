@@ -178,9 +178,10 @@ def solution_subm(request):
             answer = request.POST[box_id]
 
             try:
+                # print(f"stand = {i}, value = {answer}")
                 PartialKey.objects.get(stand=i, value=answer)
                 correct_num += 1
-                post_names += [post_names[i]]
+                post_names += [post_names_list[i]]
             except:
                 wrong_ans += [i]
 
